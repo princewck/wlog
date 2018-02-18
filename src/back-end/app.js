@@ -1,0 +1,21 @@
+const Koa = require('koa');
+const app = new Koa();
+const router = require('./router');
+
+// 路由
+app
+  .use(router.routes())
+  .use(router.allowedMethods())
+  .use((ctx, next) => {
+    if (ctx.body && !('data' in ctx.body)) {
+      ctx.body = {
+        data: ctx.body,
+      };
+    }
+  });
+
+app.on('error', (err, ctx) => {
+  log.error('server error', err, ctx)
+});
+
+app.listen(8080);
