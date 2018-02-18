@@ -5,11 +5,11 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const baseConfig = require('./webpack.config.base');
 const pkg = require('../package.json');
 
-const publicPath = `http://chengkai.wang/${pkg.name}/${pkg.version}/`;
+// const publicPath = `http://chengkai.wang/${pkg.name}/${pkg.version}/`;
 
 module.exports = merge(baseConfig, {
   output: {
-    publicPath,
+    publicPath: '/',
     filename: 'static/js/[name]-[chunkhash].js',
   },
   plugins: [

@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "NODE_ENV=local webpack-dev-server --config ./build/webpack.config.dev.js",
     "build": "NODE_ENV=production webpack --config ./build/webpack.config.prod.js",
-    "deploy": "npm ls",
+    "deploy": "npm run build && rsync -r ./dist/* root@hk:/root/wlog-front",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
