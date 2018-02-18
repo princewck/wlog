@@ -1,0 +1,145 @@
+@import '../../assets/styles/variables';
+.wlog-navbar {
+  width: 900px;
+  display: inline-block;
+  text-align: left;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  margin-left: auto;
+  margin-right: auto;
+  &-wrapper {
+    width: 100%;
+    height: 200px;
+    vertical-align: middle;
+    text-align: center;
+    position: relative;
+    &:after {
+      content: '';
+      width: 200%;
+      border-bottom: 1px solid $primary-border-color;
+      transform: scale(.5);
+      transform-origin: left bottom;
+      display: block;
+      position: absolute;
+      left: 0;
+      bottom:0;
+    }    
+  }
+
+  &-logo {
+    flex: 0 0 auto;
+    font-size: 40px;
+    font-weight: normal;
+    align-items: center;
+    display: flex;
+    align-items: center;
+    padding-right: 30px;
+  }
+
+  > ul {
+    display: inline-block;
+    list-style: none;
+    flex: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    > li {
+      display: inline-block;
+      margin-right: 25px;
+      a {
+        text-decoration: none;
+        font-weight: 200;
+        font-size: 16px;
+        color: $nav-color;
+        transition: all .3s ease;
+        &:hover {
+          color: $nav-hover-color;
+        }
+      }
+    }
+  }
+
+  &-sticky {
+    background: #fff;
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+    position: fixed;
+    top: 0;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: $box-shadow;
+    z-index: 10;
+    transform: translateY(-100px);
+    transition: all .5s ease;
+    &.active {
+      transform: translateY(0);
+    }
+    > div {
+      width: 900px;
+      height: 100%;
+      display: block;
+      text-align: left;
+      margin-left: auto;
+      margin-right: auto;
+      > ul {
+        display: inline-block;
+        height: 100%;
+        list-style: none;
+        margin-right: 30px;
+        > li {
+          display: inline-block;
+          margin-right: 16px;
+          a {
+            color: $nav-color;
+            transition: all .3s ease-in-out;
+            text-decoration: none;
+            font-weight: 200;
+            color: gray;
+            &:hover {
+              color: $nav-hover-color;
+            }
+          }
+        }
+      }      
+    }
+    &-logo {
+      display: inline-block;
+      margin-right: 50px;
+    }
+    &-search {
+      float: right;
+      height: 30px;
+      width: 200px;
+      margin-top: 15px;
+      input {
+        border: none;
+        width: 100%;
+        height: 100%;
+        display: block;
+        box-sizing: border-box;
+        background: #f5f5f5;
+        outline: none;
+        border-radius: 20px;
+        padding-left: 20px;
+        padding-right: 20px;
+        &::-webkit-input-placeholder {
+          color: rgb(202, 202, 202);
+        }
+        &:-moz-placeholder {
+          color: rgb(223, 223, 223);
+        }
+      }
+    }
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-80px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
