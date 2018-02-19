@@ -4,29 +4,18 @@ import './styles.scss';
 
 class ArticleList extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      articles: [1,1,1,1,1]
-    };
-  }
-
-  componentWillReceiveProps(nextProps) {
-    const { articles = [1,2,3,4,5] }  = nextProps;
-    this.setState({
-      articles
-    });
-  }
-
-
   render() {
-    const { articles} = this.state;
+    const { list: articles, loading } = this.props;
     return (
       <div className="article-list">
         <div className="article-list-title">
           文章列表
         </div>
-        { articles.map((article, index) => (<ArticleListItem key={ index } {...article} />)) }
+        {
+          loading 
+          ? <li className="article-list-item-wrapper" style={{textAlign: 'center'}}>加载中...</li>
+          : articles.map((article, index) => (<ArticleListItem key={ index } {...article} />))
+        }
       </div>
     );
   }

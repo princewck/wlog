@@ -20,7 +20,7 @@ function insertOne(collectionName, document) {
         .collection(collectionName)
         .insertOne(document, (err, res) => {
           if (err) reject(err);
-          else resolve('success');
+          else resolve(res);
         });
       db.close();
     }, err => {
@@ -53,7 +53,7 @@ function find(
   limit = 0,
 ) {
   return new Promise((resolve, reject) => {
-    connect().then(db => {
+    return connect().then(db => {
       const dbase = db.db(dbname);
       dbase.collection(collectionName)
         .find(conditions)
@@ -71,7 +71,15 @@ function find(
   });
 }
 
-function findByPage(collectionName, conditions={}, page = 1, rows = 20) {
+function findOne(articleId) {
+  return connect().then(db => {
+    const dbase = db.db(dbname);
+    return dbase.collection(collectionName)
+      .findOne({_id: articleId});
+  });
+}
+
+function findByPage(collectionName, conditions = {}, page = 1, rows = 20) {
   const skip = rows * (page - 1);
   return find(collectionName, conditions, null, skip, rows)
     .then((list) => {
@@ -100,12 +108,12 @@ function findByPage(collectionName, conditions={}, page = 1, rows = 20) {
 
 function updateOne(collectionName, conditions, update) {
   return new Promise((resolve, reject) => {
-    connect().then(db => {
+    return connect().then(db => {
       const dbase = db.db(dbname);
       dbase.collection(collectionName)
         .findOneAndUpdate(conditions, update, {
-          returnOriginal: false,
-          upsert: true,
+          returnOriginal: false, // 返回更新后的实体
+          upsert: true, // 不存在则插入
         }, (err, res) => {
           if (err) reject(err);
           else resolve(res);
@@ -119,7 +127,7 @@ function updateOne(collectionName, conditions, update) {
 
 function updateMany(collectionName, conditions, update) {
   return new Promise((resolve, reject) => {
-    connect().then(db => {
+    return connect().then(db => {
       const dbase = db.db(dbname);
       dbase.collection(collectionName)
         .updateOne(conditions, update, (err, res) => {
@@ -138,15 +146,33 @@ function deleteOne(collectionName, conditions = {}) {
     return Promise.reject('delete documents with empty restrictions is dangerous and not allowed!');
   }
   return new Promise((resolve, reject) => {
-    const dbase = db.db(dbname);
-    dbase.collection(collectionName)
-      .deleteOne(conditions, (err, res) => {
-        if (err) return reject(err);
-        else resolve(res);
-        db.close();
-      });
-  }, err => {
-    reject(err);
+    return connect().then(db => {
+      const dbase = db.db(dbname);
+      dbase.collection(collectionName)
+        .deleteOne(conditions, (err, res) => {
+          if (err) return reject(err);
+          else resolve(res);
+          db.close();
+        });
+    }, err => {
+      reject(err);
+    });
+  });
+}
+
+function findOneAndDelete(collectionName, confitions = {}, options = null) {
+  return new Promise((resolve, reject) => {
+    return connect().then(db => {
+      const dbase = db.db(dbname);
+      dbase.collection(collectionName)
+        .findOneAndDelete(conditions, options, (err, res) => {
+          if (err) reject(err);
+          else resolve(res);
+          db.close();
+        });
+    }, err => {
+      reject(err);
+    });
   });
 }
 
@@ -155,15 +181,17 @@ function deleteMany(collectionName, conditions = {}) {
     return Promise.reject('delete documents with empty restrictions is dangerous and not allowed!');
   }
   return new Promise((resolve, reject) => {
-    const dbase = db.db(dbname);
-    dbase.collection(collectionName)
-      .deleteMany(conditions, (err, res) => {
-        if (err) return reject(err);
-        else resolve(res);
-        db.close();
-      });
-  }, err => {
-    reject(err);
+    connect().then(db => {
+      const dbase = db.db(dbname);
+      dbase.collection(collectionName)
+        .deleteMany(conditions, (err, res) => {
+          if (err) return reject(err);
+          else resolve(res);
+          db.close();
+        });
+    }, err => {
+      reject(err);
+    });
   });
 }
 
@@ -172,8 +200,12 @@ function deleteMany(collectionName, conditions = {}) {
 module.exports = {
   insertOne,
   insertMany,
+  findOne,
   find,
   findByPage,
   updateOne,
   updateMany,
+  deleteOne,
+  findOneAndDelete,
+  deleteMany,
 }

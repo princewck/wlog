@@ -21,6 +21,14 @@ module.exports = merge(baseConfig, {
     quiet: false,
     historyApiFallback: true,
     headers: { 'Access-Control-Allow-Origin': '*' },
+    proxy: {
+      '/api': {
+        target: 'http://localhost:8080/',
+        changeOrigin: true,
+        secure: false,
+        pathRewrite: {'^/api' : ''},
+      }
+    }
   },
   plugins: [
     new webpack.DefinePlugin({

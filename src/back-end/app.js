@@ -1,6 +1,9 @@
 const Koa = require('koa');
 const app = new Koa();
 const router = require('./router');
+const koaBody = require('koa-body');
+
+app.use(koaBody());
 
 // 路由
 app
@@ -15,7 +18,7 @@ app
   });
 
 app.on('error', (err, ctx) => {
-  log.error('server error', err, ctx)
+  console.error('server error', err, ctx);
 });
 
 app.listen(8080);
