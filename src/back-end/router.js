@@ -11,5 +11,6 @@ router.post('/test/:id', testController.test);
 
 router.post('/post', articleController.create);
 router.get('/posts', articleController.list);
+router.get('/post/:id', articleController.get);
 
 module.exports = router;

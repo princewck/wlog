@@ -4,16 +4,22 @@ import conf from './tinymce';
 import './style.scss';
 
 class Edit extends Component {
-  handleEditorChange = (value) => {
-    console.log(value);
-  }
 
   componentDidMount() {
-    const { config = {} } = this.props;
+    const { config = {} , onContentChange, initArticle = {}} = this.props;
     tinymce.init({
+      selector: 'textarea',
       ...conf,
       ...config,
-      selector: 'textarea',
+      setup: (editor) => {
+        if (initArticle.content) {
+          editor.setContent(initArticle.content);
+        }
+        editor.on('keyup', (e) => {
+          console.log('content change');
+          onContentChange(editor.getContent());
+        });
+      },
     });
   }
 

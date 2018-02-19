@@ -5,8 +5,13 @@ export default store => next => action => {
     store.dispatch({
       type: action.types[0],
     });
-    const { url, data } = action;
-    axios.get(url, data).then(res => {
+    const { url, data, method = 'GET' } = action;
+    const requestData = data instanceof Function ? data(store.getState()) : data;
+    axios({
+      method,
+      url,
+      data: requestData,
+    }).then(res => {
       store.dispatch({
         type: action.types[1],
         payload: res.data,

@@ -15,8 +15,8 @@ const create = async (ctx, next) => {
       message: '内容不能为空！'
     };
   } else {
-    const res = await articleService.create(article);
-    ctx.status = 201;
+    const res = await articleService.update(article);
+    ctx.body = res;
   }
   next();
 }
@@ -35,8 +35,26 @@ const list = async (ctx, next) => {
   }
 }
 
+const get = async (ctx, next) => {
+  const id = ctx.params.id;
+  console.log(id);
+  if (!id) return ctx.status = 404;
+  try {
+    const article = await articleService.get(id);
+    ctx.body = article;
+    next();
+  } catch (e) {
+    ctx.body = {
+      message: '获取文章信息失败！',
+      data: e,
+    };
+    throw new Error(e);
+  }
+}
+
 
 module.exports = {
   create,
   list,
+  get,
 };

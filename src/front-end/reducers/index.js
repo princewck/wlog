@@ -1,6 +1,10 @@
 import { combineReducers } from 'redux';
-import article from './article';
+import articleList from './article';
+import articleDetail from './articleDetail';
+import edit from './edit';
 
 export default combineReducers({
-  article,
+  articleList,
+  articleDetail,
+  edit,
 })

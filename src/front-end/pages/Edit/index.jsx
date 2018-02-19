@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
+import * as actions from '../../actions';
+import { connect } from 'react-redux';
 import Nav from '../../components/Nav';
 import Footer from '../../components/Footer';
 import EditComp from '../../components/Edit';
@@ -12,14 +15,15 @@ const config = {
 class Edit extends Component {
 
   render() {
+    const { onPost, onContentChange, article = {}, onTitleChange } = this.props;
     return (
       <div>
         <Nav />
         <div className="wlog-edit-page">
-          <input type="text" placeholder="请输入标题" />
-          <EditComp config={ config } />
+          <input type="text" placeholder="请输入标题" value={article.title || ''} onChange={onTitleChange} />
+          <EditComp config={config} onContentChange={onContentChange} initArticle={article} />
           <div className="wlog-edit-page-operators">
-            <button type="button" className="publish-btn">发布</button>
+            <button type="button" className="publish-btn" onClick={onPost}>发布</button>
             <button type="button" className="cancel-btn">取消</button>
             <button type="button" className="draft-btn">存草稿</button>
           </div>
@@ -30,4 +34,17 @@ class Edit extends Component {
   }
 }
 
-export default Edit;
+const mapStateToProps = state => {
+  console.log(state);
+  return { article: state.edit.article };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onPost: () => { dispatch(actions.postArticle()) },
+    onContentChange: (content) => { dispatch(actions.changeContent(content)) },
+    onTitleChange: (e) => { dispatch(actions.changeTitle(e.target.value)) }
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Edit);

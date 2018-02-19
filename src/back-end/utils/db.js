@@ -1,4 +1,5 @@
 const MongoClient = require('mongodb').MongoClient;
+const ObjectId = require('mongodb').ObjectId;
 const url = "mongodb://localhost:27017/runoob";
 const dbname = 'myDB';
 
@@ -71,11 +72,12 @@ function find(
   });
 }
 
-function findOne(articleId) {
+function findOne(collectionName, articleId) {
+  console.log(new ObjectId(articleId));
   return connect().then(db => {
     const dbase = db.db(dbname);
     return dbase.collection(collectionName)
-      .findOne({_id: articleId});
+      .findOne({_id: new ObjectId(articleId)});
   });
 }
 
@@ -110,6 +112,9 @@ function updateOne(collectionName, conditions, update) {
   return new Promise((resolve, reject) => {
     return connect().then(db => {
       const dbase = db.db(dbname);
+      if (!conditions._id) {
+        conditions._id = new ObjectId();
+      }
       dbase.collection(collectionName)
         .findOneAndUpdate(conditions, update, {
           returnOriginal: false, // 返回更新后的实体

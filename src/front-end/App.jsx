@@ -8,6 +8,7 @@ import Edit from './pages/Edit';
 import { createStore, applyMiddleware } from 'redux';
 import reducers from './reducers';
 import asyncFetch from './middlewares/asyncFetch';
+import 'animate.css';
 
 const createStoreWithMiddleware = applyMiddleware(asyncFetch)(createStore);
 const store = createStoreWithMiddleware(reducers);

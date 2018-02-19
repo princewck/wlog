@@ -1,4 +1,4 @@
-import React,{Component} from 'react';
+import React, { Component } from 'react';
 import ArticleListItem from './ArticleListItem';
 import './styles.scss';
 
@@ -12,9 +12,11 @@ class ArticleList extends Component {
           文章列表
         </div>
         {
-          loading 
-          ? <li className="article-list-item-wrapper" style={{textAlign: 'center'}}>加载中...</li>
-          : articles.map((article, index) => (<ArticleListItem key={ index } {...article} />))
+          loading
+            ? <li className="article-list-item-wrapper" style={{ textAlign: 'center' }}>加载中...</li>
+            : articles.map((article, index) => {
+                return <ArticleListItem key={index} index={index} {...article} />;
+            })
         }
       </div>
     );
