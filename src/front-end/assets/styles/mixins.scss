@@ -1,0 +1,9 @@
+@mixin multiline-ellipsis($line: 2) {
+  display: box;
+  display: -webkit-box;
+  /* autoprefixer: off */
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $line;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

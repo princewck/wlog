@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import classnames from 'classnames';
-import { Link } from 'react-router-dom';
+import { NavLink as Link } from 'react-router-dom';
 import './style.scss';
 
 class Nav extends Component {
@@ -42,11 +42,8 @@ class Nav extends Component {
             wlog
           </div>
           <ul>
-            <li> <Link to="/">首页</Link></li>
-            <li> <a href="#">前端开发</a> </li>
-            <li> <a href="#">作品集</a> </li>
-            <li> <Link to="/edit/1">写文章</Link> </li>
-            <li> <a href="#">日志</a> </li>
+            <li> <Link exact={true} to="/">日志列表</Link></li>
+            <li> <Link exact={true}to="/edit/1">写文章</Link> </li>
           </ul>
         </div>
         <div className={classnames('wlog-navbar-sticky', {
@@ -57,11 +54,8 @@ class Nav extends Component {
               王子的网站 { this.state.sticky }
             </div>  
             <ul>
-              <li> <Link to="/">首页</Link></li>
-              <li> <a href="#">前端开发</a> </li>
-              <li> <a href="#">作品集</a> </li>
-              <li> <Link to="/edit/1">写文章</Link> </li>
-              <li> <a href="#">日志</a> </li>
+              <li> <Link exact={true} to="/">日志列表</Link></li>
+              <li> <Link exact={true} to="/edit/1">写文章</Link> </li>
             </ul> 
             <div className="wlog-navbar-sticky-search">
               <input type="text" placeholder="搜索内容" />

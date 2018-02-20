@@ -25,6 +25,10 @@
       left: 0;
       bottom:0;
     }    
+    li > a.active {
+      color: rgb(77, 173, 238);
+      border-bottom: 1px solid rgb(103, 220, 255);
+    }
   }
 
   &-logo {

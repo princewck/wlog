@@ -1,3 +1,4 @@
+@import '../../assets/styles/mixins';
 .article-list {
   width: 900px;
   padding: 15px 0; 
@@ -50,6 +51,7 @@
       font-size: 13px;
       font-weight: 300;
       line-height: 1.5;
+      @include multiline-ellipsis(3);
     }
     .more {
       width: 100%;

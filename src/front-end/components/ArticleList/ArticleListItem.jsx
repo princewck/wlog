@@ -10,7 +10,7 @@ class ArticleListItem extends Component {
 
     return (
       <div 
-        className="article-list-item-wrapper animated slideInRight"
+        className="article-list-item-wrapper animated fadeIn"
         style={{
           animationDuration: '400ms',
           animationDelay: index * 100 + 'ms',
