@@ -1,9 +1,44 @@
-const db = require('../utils/db');
+const ObjectId = require('mongodb').ObjectId;
 
-function findAllUsers() {
-  return db.findByPage('user');
+const db = require('../utils/db');
+const crypto = require('crypto');
+
+const USER = 'user';
+
+function findAllUsers(page=1) {
+  return db.findByPage(USER, {}, page, undefined, {
+    projection: {password: 0, salt: 0}
+  });
+}
+
+function create(user) {
+  const pwd = user.password;
+  const salt = new Date().valueOf().toString(16);
+  user.password = crypto
+    .createHash('md5')
+    .update(pwd + salt)
+    .digest('hex');
+  user.salt = salt;
+  return db.insertOne(USER, user);
+}
+
+function get(id) {
+  return db.findOne(USER, id, {projection: {password: 0, salt: 0}});
+}
+
+// caution!!, no projection , password will returned
+function findByName(name) {
+  return db.find(USER, {name});
+}
+
+function update(id, update) {
+  return db.updateOne(USER, {_id: new ObjectId(id)}, update);
 }
 
 module.exports = {
-  findAllUsers
+  findAllUsers,
+  findByName,
+  create,
+  get,
+  update,
 };

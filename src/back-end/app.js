@@ -10,11 +10,12 @@ app
   .use(router.routes())
   .use(router.allowedMethods())
   .use((ctx, next) => {
-    if (ctx.body && !('data' in ctx.body)) {
+    if (ctx.status === 200 && ctx.body && !('data' in ctx.body)) {
       ctx.body = {
         data: ctx.body,
       };
     }
+    next();
   });
 
 app.on('error', (err, ctx) => {

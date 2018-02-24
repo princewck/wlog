@@ -1,7 +1,7 @@
 const MongoClient = require('mongodb').MongoClient;
 const ObjectId = require('mongodb').ObjectId;
 const url = "mongodb://localhost:27017/runoob";
-const dbname = 'myDB';
+const dbname = 'wlog';
 
 // close db after use manually
 function connect() {
@@ -52,12 +52,13 @@ function find(
   sort = {},
   skip = 0,
   limit = 0,
+  options = null,
 ) {
   return new Promise((resolve, reject) => {
     return connect().then(db => {
       const dbase = db.db(dbname);
       dbase.collection(collectionName)
-        .find(conditions)
+        .find(conditions, options)
         .sort(sort)
         .skip(skip)
         .limit(limit)
@@ -72,18 +73,17 @@ function find(
   });
 }
 
-function findOne(collectionName, articleId) {
-  console.log(new ObjectId(articleId));
+function findOne(collectionName, id, options = {}) {
   return connect().then(db => {
     const dbase = db.db(dbname);
     return dbase.collection(collectionName)
-      .findOne({_id: new ObjectId(articleId)});
+      .findOne({_id: new ObjectId(id)}, options);
   });
 }
 
-function findByPage(collectionName, conditions = {}, page = 1, rows = 20) {
+function findByPage(collectionName, conditions = {}, page = 1, rows = 20, options) {
   const skip = rows * (page - 1);
-  return find(collectionName, conditions, null, skip, rows)
+  return find(collectionName, conditions, null, skip, rows, options)
     .then((list) => {
       return connect().then(db => {
         return new Promise((resolve, reject) => {
