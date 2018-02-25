@@ -1,3 +1,5 @@
+import { Buffer } from 'buffer';
+
 const _ = require('lodash');
 const crypto = require('crypto');
 const db = require('../utils/db');
@@ -24,15 +26,18 @@ async function login(name, password) {
 }
 
 async function refreshToken(user) {
-  const token = await jwt.sign({
+  const signature = await jwt.sign({
     name: user.name,
     id: user._id,
+    created_at: new Date().valueOf(),
   });
+  const token = new Buffer(signature).toString('base64');
   return await userService.update(user._id, Object.assign({}, user, {token}));
 }
 
 async function verify(token) {
-  return await jwt.verify(token);
+  const signature = new Buffer(token, 'base64').toString();
+  return await jwt.verify(signature);
 }
 
 async function decode(token) {

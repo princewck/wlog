@@ -1,0 +1,19 @@
+.login-page {
+  width: 100%;
+  text-align: center;
+
+  form {
+    text-align: left;
+    .form-group {
+      width: 100%;
+      label {
+        float: left;
+      }
+      &:before {
+        content: '';
+        display: block;
+        clear: both;
+      }
+    }
+  }
+}

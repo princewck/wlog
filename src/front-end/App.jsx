@@ -6,6 +6,7 @@ import Test from './components/Test';
 import Home from './pages/Home';
 import Article from './pages/Article';
 import Edit from './pages/Edit';
+import Login from './pages/Auth/Login';
 import { createStore, applyMiddleware } from 'redux';
 import reducers from './reducers';
 import asyncFetch from './middlewares/asyncFetch';
@@ -25,9 +26,10 @@ export default (props) => {
                 <TransitionGroup>
                   <CSSTransition key={location.key} classNames="fade" timeout={300}>
                     <Switch location={location} >
-                      <Route exact path="/" component={Home}></Route>
-                      <Route path="/post/:id" component={Article}></Route>
-                      <Route path="/edit/:id" component={Edit}></Route>
+                      <Route exact path="/" component={Login}/>
+                      <Route exact path="/posts" component={Home} />
+                      <Route path="/post/:id" component={Article} />
+                      <Route path="/edit/:id" component={Edit} />
                     </Switch>
                   </CSSTransition>
                 </TransitionGroup>

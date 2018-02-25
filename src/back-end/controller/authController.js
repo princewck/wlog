@@ -3,7 +3,7 @@ const userService = require('../service/userService');
 
 const login = async (ctx, next) => {
   const params = ctx.request.body;
-  const { name, password } = params;
+  const { name:name, password } = params;
   const user = await authService.login(name, password);
   console.log(name, password);
   if (user) {

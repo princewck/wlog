@@ -7,6 +7,7 @@ export default store => next => action => {
     });
     const { url, data, method = 'GET' } = action;
     const requestData = data instanceof Function ? data(store.getState()) : data;
+    console.log('%cajax数据:', 'color: green', requestData);
     axios({
       method,
       url,
