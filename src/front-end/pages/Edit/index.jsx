@@ -35,7 +35,6 @@ class Edit extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state);
   return { article: state.edit.article };
 };
 

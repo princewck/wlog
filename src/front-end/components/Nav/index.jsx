@@ -1,8 +1,15 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import classnames from 'classnames';
 import { NavLink as Link } from 'react-router-dom';
 import './style.scss';
+
+const links = [
+  {
+    url: '/posts',
+    title: '文章列表'
+  },
+];
 
 class Nav extends Component {
 
@@ -15,7 +22,6 @@ class Nav extends Component {
 
   componentDidMount() {
     const nav = ReactDOM.findDOMNode(this);
-    console.log(nav);
     document.addEventListener('scroll', this.scrollHandler);
   }
 
@@ -35,15 +41,22 @@ class Nav extends Component {
 
 
   render() {
+    const { isLogin } = this.props;
     return (
       <nav className="wlog-navbar-wrapper">
         <div className="wlog-navbar">
           <div className="wlog-navbar-logo">
-            wlog
+            BLOG建设中...
           </div>
           <ul>
-            <li> <Link exact={true} to="/">日志列表</Link></li>
-            <li> <Link exact={true}to="/edit/1">写文章</Link> </li>
+            {
+              links.map((link, index) => (<li key={index}> <Link exact={true} to={link.url}>
+                {link.title}
+              </Link></li>))
+            }
+            {
+              isLogin ? <li> <Link exact={true} to="/edit/1">写文章</Link> </li> : null
+            }
           </ul>
         </div>
         <div className={classnames('wlog-navbar-sticky', {
@@ -51,19 +64,22 @@ class Nav extends Component {
         })}>
           <div>
             <div className="wlog-navbar-sticky-logo">
-              王子的网站 { this.state.sticky }
-            </div>  
+              PRINCEWCK的网站 {this.state.sticky}
+            </div>
             <ul>
-              <li> <Link exact={true} to="/">日志列表</Link></li>
-              <li> <Link exact={true} to="/edit/1">写文章</Link> </li>
-            </ul> 
+              {
+                links.map((link, index) => (<li key={index}> <Link exact={true} to={link.url}>
+                  {link.title}
+                </Link></li>))
+              }
+            </ul>
             <div className="wlog-navbar-sticky-search">
               <input type="text" placeholder="搜索内容" />
             </div>
-          </div>                       
-        </div> 
+          </div>
+        </div>
       </nav>
-    );    
+    );
   }
 }
 

@@ -16,7 +16,6 @@ class Edit extends Component {
           editor.setContent(initArticle.content);
         }
         editor.on('keyup', (e) => {
-          console.log('content change');
           onContentChange(editor.getContent());
         });
       },

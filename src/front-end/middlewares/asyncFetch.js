@@ -7,11 +7,14 @@ export default store => next => action => {
     });
     const { url, data, method = 'GET' } = action;
     const requestData = data instanceof Function ? data(store.getState()) : data;
-    console.log('%cajax数据:', 'color: green', requestData);
+    const loginState = store.getState()['login'] || {};
     axios({
       method,
       url,
       data: requestData,
+      headers: {
+        Authorization: loginState.token,
+      }
     }).then(res => {
       store.dispatch({
         type: action.types[1],

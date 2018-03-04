@@ -35,8 +35,8 @@ export const postArticle = () => ({
   url: `/api/post`,
   method: 'POST',
   data: (store) => {
-    console.log('store', store);
-    return (store.edit.article);
+    const {id = null} = store.login;
+    return ({...store.edit.article, author: id});
   },
 });
 

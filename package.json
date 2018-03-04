@@ -42,7 +42,7 @@
     "html-webpack-plugin": "^2.30.1",
     "lodash-webpack-plugin": "^0.11.4",
     "markdown-js": "0.0.3",
-    "moment": "^2.20.1",
+    "moment": "^2.21.0",
     "nconf": "^0.10.0",
     "node-sass": "^4.7.2",
     "optimize-css-assets-webpack-plugin": "^3.2.0",
@@ -69,6 +69,7 @@
     "webpack-merge": "^4.1.1"
   },
   "dependencies": {
+    "history": "^4.7.2",
     "jsonwebtoken": "^8.1.1",
     "koa": "^2.5.0",
     "koa-body": "^2.5.0",

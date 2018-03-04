@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import ArticleList from '../../components/ArticleList';
 import NavBar from '../../components/Nav';
 import ScrollTop from '../../components/ScrollTop';
@@ -17,24 +17,27 @@ class Home extends Component {
   }
 
   render() {
-    const { articles, loading } = this.props;
+    const { articles, loading, isLogin } = this.props;
     return (
       <div className="wlog-home-page">
-        <NavBar />
+        <NavBar isLogin={isLogin}/>
         <div className="article-list">
-          <ArticleList list={articles} loading={loading}/>
+          <ArticleList list={articles} loading={loading} />
         </div>
         <ScrollTop />
-        <Footer/>
+        <Footer />
       </div>
     );
   }
 }
 
-const mapStateToProps = state => ({
-  articles: state.articleList.articleList,
-  loading: state.articleList.loading,
-});
+const mapStateToProps = state => {
+  return {
+    articles: state.articleList.articleList,
+    loading: state.articleList.loading,
+    isLogin: state.login && state.login.token,
+  };
+};
 
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(actionCreators, dispatch),

@@ -3,19 +3,18 @@ const app = new Koa();
 const router = require('./router');
 const koaBody = require('koa-body');
 
-app.use(koaBody());
 
-// 路由
 app
+  .use(koaBody())
   .use(router.routes())
   .use(router.allowedMethods())
-  .use((ctx, next) => {
+  .use(async (ctx, next) => {
     if (ctx.status === 200 && ctx.body && !('data' in ctx.body)) {
       ctx.body = {
         data: ctx.body,
       };
     }
-    next();
+    await next();
   });
 
 app.on('error', (err, ctx) => {

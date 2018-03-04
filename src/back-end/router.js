@@ -3,8 +3,11 @@ const userController = require('./controller/userController');
 const testController = require('./controller/testController');
 const articleController = require('./controller/articleController');
 const authController = require('./controller/authController');
+const checkAuth = require('./middleware/auth');
 
 const router = new Router();
+
+router.use(['/post'], checkAuth);
 
 router.post('/test/:id', testController.test);
 

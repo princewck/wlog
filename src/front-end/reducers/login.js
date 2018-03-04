@@ -5,11 +5,18 @@ import {
   LOGIN_SUCCESS,
   LOGIN_ERROR,
 } from '../constants/loginTypes';
+import {getUser, setUser} from '../utils/tokenHandler';
+import createHistory from 'history/createBrowserHistory';
+const history = createHistory();
+
+const user = getUser();
 
 const initialState = {
-  username: null,
-  password: null,
+  username: 'liying',
+  password: 'Mima12345',
   loading: false,
+  token: user.token,
+  id: user.id
 };
 
 export default function loginReducer(
@@ -33,9 +40,13 @@ export default function loginReducer(
         loading: true,
       };
     case LOGIN_SUCCESS:
-      // persistent token to storage;
+      const user = action.payload;
+      setUser(user);
       return {
         ...state,
+        username: user.name,
+        token: user.token,
+        id: user._id,
         loading: false,
       }
     case LOGIN_ERROR:

@@ -9,7 +9,6 @@ const findAllUsers = async (ctx, next) => {
 
 const create = async (ctx, next) => {
   const user = ctx.request.body;
-  console.log(user);
   const nameError = validateName(user.name);
   const pwdError = validatePwd(user.password);
   if (nameError) {

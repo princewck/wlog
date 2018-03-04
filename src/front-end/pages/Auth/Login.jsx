@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-// import { bindActionCreators } from 'redux';
+import { Redirect } from 'react-router';
 import * as actions from '../../actions/login';
 import './style.scss';
 
@@ -14,14 +14,15 @@ class Login extends Component {
       onChangeUsername,
       onChangePassword,
       doLogin,
+      isLogin,
     } = this.props;
-    return (
+    return isLogin ? <Redirect to="/posts" /> :
       <div className="login-page">
         <form onSubmit={doLogin}>
           <div className="form-group">
             <label>
               用户名:
-              <input
+            <input
                 type="text"
                 value={username}
                 onChange={onChangeUsername}
@@ -32,7 +33,7 @@ class Login extends Component {
           <div className="form-group">
             <label>
               用户名:
-              <input
+            <input
                 type="password"
                 placeholder="请输入密码"
                 value={password}
@@ -43,33 +44,33 @@ class Login extends Component {
           <div className="form-group">
             <label>
               用户名:
-              <input type="submit" value="登陆" onClick={doLogin}/>
+            <input type="submit" value="登陆" onClick={doLogin} />
             </label>
           </div>
         </form>
-      </div>
-    );
+      </div>;
   }
 }
 
-const mapStateToProps = ({ username, password }) => {
+const mapStateToProps = ({ login: { username, password, token } }) => {
   return {
     username,
     password,
+    isLogin: token,
   };
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    onChangeUsername: (e) => {
-      dispatch(actions.changeName(e.target.value));
-    },
-    onChangePassword: (e) => {
-      dispatch(actions.changePassword(e.target.value));
-    },
-    doLogin: (e) => {
-      e.preventDefault();
-      dispatch(actions.doLogin())
-    }
-  });
+  onChangeUsername: (e) => {
+    dispatch(actions.changeName(e.target.value));
+  },
+  onChangePassword: (e) => {
+    dispatch(actions.changePassword(e.target.value));
+  },
+  doLogin: (e) => {
+    e.preventDefault();
+    dispatch(actions.doLogin())
+  }
+});
 
-export default connect(mapDispatchToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

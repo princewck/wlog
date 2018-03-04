@@ -1,7 +1,6 @@
 import React from 'react';
-import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
+import { Route, BrowserRouter as Router, Switch, Redirect } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { TransitionGroup, CSSTransition } from "react-transition-group";
 import Test from './components/Test';
 import Home from './pages/Home';
 import Article from './pages/Article';
@@ -23,16 +22,13 @@ export default (props) => {
           render={
             ({ location }) => {
               return (
-                <TransitionGroup>
-                  <CSSTransition key={location.key} classNames="fade" timeout={300}>
-                    <Switch location={location} >
-                      <Route exact path="/" component={Login}/>
-                      <Route exact path="/posts" component={Home} />
-                      <Route path="/post/:id" component={Article} />
-                      <Route path="/edit/:id" component={Edit} />
-                    </Switch>
-                  </CSSTransition>
-                </TransitionGroup>
+                <Switch location={location} >
+                  <Route exact path="/" component={Login} />
+                  <Route exact path="/posts" component={Home} />
+                  <Route path="/post/:id" component={Article} />
+                  <Route path="/edit/:id" component={Edit} />
+                  <Redirect to="/" />
+                </Switch>
               );
             }
           }

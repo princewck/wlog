@@ -8,7 +8,6 @@ class Article extends Component {
 
   render() {
     const { article = {} } = this.props;
-    console.log(article);
     return (
       <div className="wlog-article-wrapper">
         <div className="wlog-article animated fadeIn">

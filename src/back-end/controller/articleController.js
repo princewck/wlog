@@ -37,7 +37,6 @@ const list = async (ctx, next) => {
 
 const get = async (ctx, next) => {
   const id = ctx.params.id;
-  console.log(id);
   if (!id) return ctx.status = 404;
   try {
     const article = await articleService.get(id);
