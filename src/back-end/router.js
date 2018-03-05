@@ -3,11 +3,12 @@ const userController = require('./controller/userController');
 const testController = require('./controller/testController');
 const articleController = require('./controller/articleController');
 const authController = require('./controller/authController');
+const tagController = require('./controller/tagController');
 const checkAuth = require('./middleware/auth');
 
 const router = new Router();
 
-router.use(['/post'], checkAuth);
+router.use(['/post', '/tag'], checkAuth);
 
 router.post('/test/:id', testController.test);
 
@@ -20,8 +21,13 @@ router.post('/post', articleController.create);
 router.get('/posts', articleController.list);
 router.get('/post/:id', articleController.get);
 
+
 router.post('/login', authController.login);
 router.post('/checkToken', authController.verify)
 router.post('/decode', authController.decode)
 
+
+router.post('/tag', tagController.create);
+router.put('/tag/:id', tagController.update);
+router.get('/tags/:userId', tagController.list);
 module.exports = router;

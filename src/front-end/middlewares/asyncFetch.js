@@ -1,4 +1,14 @@
 import axios from 'axios';
+axios.interceptors.response.use(function(response){
+  return response;
+},function(error){
+  if (error.response.status === 401) {
+    localStorage.setItem('user', null);
+    window.location.href = '/';
+  }
+  //对返回的错误进行一些处理
+  return Promise.reject(error);
+});
 
 export default store => next => action => {
   if (action.types && action.types.length === 3) {

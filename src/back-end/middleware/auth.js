@@ -7,6 +7,7 @@ module.exports = async (ctx, next) => {
   const user = await authService.verify(token);
   if (user && user.token === token) {
     if (moment(user.token_expires).isAfter(moment.now())) {
+      ctx.$user = user;
       await next();
     } else {
       ctx.status = 401;

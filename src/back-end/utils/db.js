@@ -81,6 +81,14 @@ function findOne(collectionName, id, options = {}) {
   });
 }
 
+function findById(collectionName, id) {
+  return connect().then(db => {
+    const dbase = db.db(dbname);
+    return dbase.collection(collectionName)
+      .find({_id: new ObjectId(id)}, options);
+  });
+}
+
 function findByPage(collectionName, conditions = {}, page = 1, rows = 20, options) {
   const skip = rows * (page - 1);
   return find(collectionName, conditions, null, skip, rows, options)
@@ -114,6 +122,8 @@ function updateOne(collectionName, conditions, update) {
       const dbase = db.db(dbname);
       if (!conditions._id) {
         conditions._id = new ObjectId();
+      } else if (conditions._id && typeof(conditions._id) === 'string') {
+        conditions._id = new ObjectId(conditions._id);
       }
       dbase.collection(collectionName)
         .findOneAndUpdate(conditions, update, {
@@ -207,6 +217,7 @@ module.exports = {
   insertMany,
   findOne,
   find,
+  findById,
   findByPage,
   updateOne,
   updateMany,
