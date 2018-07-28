@@ -32,7 +32,7 @@ function findByName(name) {
 }
 
 function update(id, update) {
-  return db.updateOne(USER, {_id: new ObjectId(id)}, update);
+  return db.updateOne(USER, {_id: new ObjectId(id)}, {$set: update});
 }
 
 module.exports = {

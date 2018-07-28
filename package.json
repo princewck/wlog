@@ -6,9 +6,9 @@
   "scripts": {
     "dev": "NODE_ENV=local webpack-dev-server --config ./build/webpack.config.dev.js",
     "build": "NODE_ENV=production webpack --config ./build/webpack.config.prod.js",
-    "deploy": "npm run build && rsync -r ./dist/* root@hk:/root/wlog-front",
+    "deploy": "npm run build && scp -r ./dist/* root@hk:/root/wlog-front",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "deployService": "rsync -ri ./src/back-end/* root@hk:/root/wlog-node/src && scp ./package.json root@hk:/root/wlog-node && ssh hk 'cd wlog-node && forever stop ./src/app.js && forever start -l `date +%Y-%m-%d_%H:%M:%S_wlog.log` ./src/app.js && forever logs'"
+    "deployService": "scp -r ./src/back-end/* root@hk:/root/wlog-node/src && scp ./package.json root@hk:/root/wlog-node && ssh hk 'cd wlog-node && forever stop ./src/app.js && forever start -l `date +%Y-%m-%d_%H:%M:%S_wlog.log` ./src/app.js && forever logs'"
   },
   "keywords": [],
   "author": "",
@@ -42,7 +42,6 @@
     "html-webpack-plugin": "^2.30.1",
     "lodash-webpack-plugin": "^0.11.4",
     "markdown-js": "0.0.3",
-    "moment": "^2.21.0",
     "nconf": "^0.10.0",
     "node-sass": "^4.7.2",
     "optimize-css-assets-webpack-plugin": "^3.2.0",
@@ -79,6 +78,7 @@
     "lodash": "^4.17.5",
     "mongodb": "^3.0.2",
     "react-markdown": "^3.4.1",
-    "tui-editor": "^1.2.6"
+    "tui-editor": "^1.2.6",
+    "moment": "^2.21.0"
   }
 }

@@ -33,7 +33,9 @@ async function refreshToken(user) {
   });
   const token = new Buffer(signature).toString('base64');
   const expiresAt = new Date().valueOf() + TOKEN_IAT;
-  return await userService.update(user._id, Object.assign({}, user, { token, token_expires: expiresAt }));
+  const update = Object.assign({}, user, { token, token_expires: expiresAt });
+  delete update._id;
+  return await userService.update(user._id, update);
 }
 
 async function verify(token) {
