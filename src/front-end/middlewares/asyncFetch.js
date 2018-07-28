@@ -4,7 +4,7 @@ axios.interceptors.response.use(function(response){
 },function(error){
   if (error.response.status === 401) {
     localStorage.setItem('user', null);
-    window.location.href = '/';
+    window.location.href = '/login';
   }
   //对返回的错误进行一些处理
   return Promise.reject(error);

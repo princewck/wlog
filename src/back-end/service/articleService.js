@@ -1,5 +1,6 @@
 const _ = require('lodash');
 const db = require('../utils/db');
+const ObjectId = require('mongodb').ObjectId;
 
 const COLLECTION = 'article';
 
@@ -29,6 +30,10 @@ const findArticles = (page = 1) => {
   return db.findByPage(COLLECTION, {}, page, 25);
 }
 
+const findArticlesByUserId = (id, page = 1) => {
+  return db.findByPage(COLLECTION, {author: id}, page);
+}
+
 const get = id => db.findOne(COLLECTION, id);
 
 module.exports = {
@@ -36,5 +41,6 @@ module.exports = {
   remove,
   update,
   findArticles,
+  findArticlesByUserId,
   get,
 };

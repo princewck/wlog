@@ -8,6 +8,7 @@ import {
   Edit,
   Login,
   EditMD,
+  MyPosts,
 } from './pages';
 import { createStore, applyMiddleware } from 'redux';
 import reducers from './reducers';
@@ -26,8 +27,10 @@ export default (props) => {
             ({ location }) => {
               return (
                 <Switch location={location} >
-                  <Route exact path="/" component={Login} />
+                  <Route exact path="/" component={Home} />
                   <Route exact path="/posts" component={Home} />
+                  <Route exact path="/mine/posts" component={MyPosts}/>
+                  <Route exact path="/login" component={Login} />
                   <Route path="/post/:id" component={Article} />
                   <Route path="/edit/1/:id" component={Edit} />
                   <Route path="/edit/2/:id" component={EditMD} />

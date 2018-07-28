@@ -8,7 +8,7 @@ const checkAuth = require('./middleware/auth');
 
 const router = new Router();
 
-router.use(['/post', '/tag'], checkAuth);
+router.use(['/tag'], checkAuth);
 
 router.post('/test/:id', testController.test);
 
@@ -17,9 +17,11 @@ router.get('/user/:id', userController.get);
 router.post('/user', userController.create);
 
 
-router.post('/post', articleController.create);
+router.post('/post', articleController.create, checkAuth);
 router.get('/posts', articleController.list);
 router.get('/post/:id', articleController.get);
+
+router.get('/my/posts', articleController.listMy, checkAuth);
 
 
 router.post('/login', authController.login);

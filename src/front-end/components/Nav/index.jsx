@@ -9,6 +9,10 @@ const links = [
     url: '/posts',
     title: '文章列表'
   },
+  {
+    url: '/mine/posts',
+    title: '我的文章'
+  },
 ];
 
 class Nav extends Component {

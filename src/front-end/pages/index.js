@@ -3,6 +3,7 @@ import Login from './Auth/Login';
 import Edit from './Edit';
 import Home from './Home';
 import EditMD from './EditMD';
+import MyPosts from './MyPosts';
 
 export {
   Article,
@@ -10,4 +11,5 @@ export {
   Edit,
   EditMD,
   Home,
+  MyPosts,
 }

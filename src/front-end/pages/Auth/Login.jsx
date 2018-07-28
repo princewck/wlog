@@ -32,7 +32,7 @@ class Login extends Component {
           </div>
           <div className="form-group">
             <label>
-              用户名:
+              密码:
             <input
                 type="password"
                 placeholder="请输入密码"
@@ -43,7 +43,6 @@ class Login extends Component {
           </div>
           <div className="form-group">
             <label>
-              用户名:
             <input type="submit" value="登陆" onClick={doLogin} />
             </label>
           </div>

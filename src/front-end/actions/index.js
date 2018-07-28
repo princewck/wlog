@@ -3,6 +3,9 @@ import {
   FETCH_ARTICLES_START,
   FETCH_ARTICLES_DONE,
   FETCH_ARTICLES_ERROR,
+  FETCH_MY_ARTICLES_START,
+  FETCH_MY_ARTICLES_DONE,
+  FETCH_MY_ARTICLES_ERROR,
 } from '../constants/articleTypes';
 import {
   FETCH_ARTICLE_START,
@@ -22,6 +25,13 @@ export const fetchArticles = (page) => ({
   type: 'FETCH_ARTICLES',
   types: [FETCH_ARTICLES_START, FETCH_ARTICLES_DONE, FETCH_ARTICLES_ERROR],
   url: '/api/posts?page=1',
+  data: {},
+});
+
+export const fetchMyArticles = (page = 1) => ({
+  type: 'FETCH_MY_ARTICLES',
+  types: [FETCH_MY_ARTICLES_START, FETCH_MY_ARTICLES_DONE, FETCH_MY_ARTICLES_ERROR],
+  url: '/api/my/posts?page=1',
   data: {},
 });
 
