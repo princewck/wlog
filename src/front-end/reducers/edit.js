@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import {
+  SET_TYPE,
   CHANGE_CONTENT,
   CHANGE_TITLE,
   POST_ARTICLE_START,
@@ -12,15 +13,36 @@ const initialState = {
   posting: false,
 };
 
+function parseArticleType(t) {
+  if ([1, 2].includes(+t)) {
+    return +t;
+  }
+  return 1;
+}
+
 export default function editReducer(state = initialState, action) {
   const type = _.get(action, 'type');
   switch (type) {
-    case CHANGE_CONTENT:
+    case SET_TYPE:
       return {
         ...state,
         article: {
           ...state.article,
-          content: action.payload,
+          format: parseArticleType(action.payload) // 1 富文本， 2 md
+        }
+      };
+    case CHANGE_CONTENT:
+      const article = {content: action.payload};
+      if (state.article.format === 2) {
+        const content = state.article.content || '';
+        const match = content.match(/#{1,5}\s((\w|[\u4e00-\u9fa5])+)/) || [];
+        article.title = match[1] || '';
+      }
+      return {
+        ...state,
+        article: {
+          ...state.article,
+          ...article
         }
       }
     case CHANGE_TITLE:
@@ -47,7 +69,7 @@ export default function editReducer(state = initialState, action) {
     case POST_ARTICLE_ERROR:
       alert('发布文章失败！');
       return {
-        article: {},
+        ...state,
         posting: false,
       };
     default:

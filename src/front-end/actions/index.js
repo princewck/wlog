@@ -15,6 +15,7 @@ import {
   POST_ARTICLE_ERROR,
   CHANGE_CONTENT,
   CHANGE_TITLE,
+  SET_TYPE,
 } from '../constants/editTypes';
 
 export const fetchArticles = (page) => ({
@@ -38,6 +39,11 @@ export const postArticle = () => ({
     const {id = null} = store.login;
     return ({...store.edit.article, author: id});
   },
+});
+
+export const setArticleFormat = (type = 1) => ({
+  type: SET_TYPE,
+  payload: type,
 });
 
 export const changeContent = content => ({

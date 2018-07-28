@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { bindActionCreators } from 'redux';
 import * as actions from '../../actions';
 import { connect } from 'react-redux';
 import Nav from '../../components/Nav';
@@ -13,6 +12,11 @@ const config = {
 };
 
 class Edit extends Component {
+
+  componentDidMount() {
+    const { setFormat } = this.props;
+    setFormat(1);
+  }
 
   render() {
     const { onPost, onContentChange, article = {}, onTitleChange } = this.props;
@@ -42,7 +46,8 @@ const mapDispatchToProps = dispatch => {
   return {
     onPost: () => { dispatch(actions.postArticle()) },
     onContentChange: (content) => { dispatch(actions.changeContent(content)) },
-    onTitleChange: (e) => { dispatch(actions.changeTitle(e.target.value)) }
+    onTitleChange: (e) => { dispatch(actions.changeTitle(e.target.value)) },
+    setFormat: (type) => { dispatch(actions.setArticleFormat(type)); }
   };
 }
 

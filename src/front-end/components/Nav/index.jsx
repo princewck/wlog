@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import ReactDOM from 'react-dom';
 import classnames from 'classnames';
 import { NavLink as Link } from 'react-router-dom';
@@ -46,7 +46,7 @@ class Nav extends Component {
       <nav className="wlog-navbar-wrapper">
         <div className="wlog-navbar">
           <div className="wlog-navbar-logo">
-            BLOG建设中...
+            BLOG
           </div>
           <ul>
             {
@@ -55,7 +55,12 @@ class Nav extends Component {
               </Link></li>))
             }
             {
-              isLogin ? <li> <Link exact={true} to="/edit/1">写文章</Link> </li> : null
+              isLogin ? (
+                <Fragment>
+                  <li> <Link exact={true} to="/edit/1/new">写文章</Link> </li>
+                  <li> <Link exact={true} to="/edit/2/new">写Markdown</Link> </li>
+                </Fragment>
+              ) : null
             }
           </ul>
         </div>

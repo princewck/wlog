@@ -1,0 +1,31 @@
+.wlog-md-edit-page {
+  &-operators {
+    width: 100%;
+    padding: 15px 0;
+    > button {
+      border: 1px solid transparent;
+      box-shadow: 1px 1px 1px #dfdfdf;
+      outline: none;
+      border-radius: 4px;
+      padding: 0 15px;
+      &:hover {
+        opacity: .8;
+        cursor: pointer;
+      }
+    }
+    .publish-btn {
+      height: 30px;
+      background: #05a165;
+      color: #fff;
+      font-size: 16px;
+      font-weight: lighter;
+      border-radius: 4px;
+    }
+    .cancel-btn {
+      margin-left: 30px;
+    }
+    .draft-btn {
+      float: right;
+    }
+  }
+}

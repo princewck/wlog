@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './style.scss';
 import Nav from '../../components/Nav';
 import ArticleDetail from '../../components/Article';
+import Markdown from '../../components/MarkdownDetail';
 import Footer from '../../components/Footer';
 import ScrollTop from '../../components/ScrollTop';
 import { connect } from 'react-redux';
@@ -21,13 +22,14 @@ class Article extends Component {
 
   render() {
     const { article, loading } = this.props;
+    const Detail = article.format === 1 ? ArticleDetail : Markdown;
     return (
       <div>
         <Nav />
         {
           loading
             ? <div style={{minHeight: '300px', textAlign: 'center'}}>加载中...</div>
-            : <ArticleDetail article={article} />
+            : <Detail article={article} />
         }
         <Footer />
         <ScrollTop />
