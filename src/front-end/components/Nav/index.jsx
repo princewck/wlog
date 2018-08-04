@@ -3,11 +3,13 @@ import ReactDOM from 'react-dom';
 import classnames from 'classnames';
 import { NavLink as Link } from 'react-router-dom';
 import './style.scss';
+import logo from '../../assets/images/logo.png';
+import { UserIcon } from '../../components/Svg';
 
 const links = [
   {
     url: '/posts',
-    title: '文章列表'
+    title: '首页'
   },
   {
     url: '/mine/posts',
@@ -50,7 +52,7 @@ class Nav extends Component {
       <nav className="wlog-navbar-wrapper">
         <div className="wlog-navbar">
           <div className="wlog-navbar-logo">
-            BLOG
+            <img src={logo} />
           </div>
           <ul>
             {
@@ -67,6 +69,9 @@ class Nav extends Component {
               ) : null
             }
           </ul>
+          <div className="user-info">
+            <UserIcon/>
+          </div>          
         </div>
         <div className={classnames('wlog-navbar-sticky', {
           active: this.state.sticky

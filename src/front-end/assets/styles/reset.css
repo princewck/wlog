@@ -47,3 +47,7 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+
+#root {
+  background-image: linear-gradient(to bottom, #f8f8f8, #eaeaea);
+}

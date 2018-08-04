@@ -27,7 +27,7 @@ const update = (article) => {
 }
 
 const findArticles = (page = 1) => {
-  return db.findByPage(COLLECTION, {}, page, 25);
+  return db.findByPage(COLLECTION, {}, page, 25, {}, {});
 }
 
 const findArticlesByUserId = (id, page = 1) => {

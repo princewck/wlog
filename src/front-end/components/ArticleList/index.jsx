@@ -8,9 +8,6 @@ class ArticleList extends Component {
     const { list: articles, loading } = this.props;
     return (
       <div className="article-list">
-        <div className="article-list-title">
-          文章列表
-        </div>
         {
           loading
             ? <div className="article-list-loading" style={{ textAlign: 'center' }}>加载中...</div>

@@ -30,7 +30,8 @@ const list = async (ctx, next) => {
     const data = await articleService.findArticles(page);
     ctx.body = data;
   } catch (e) {
-    ctx.status = 401;
+    console.log(e);
+    ctx.status = 400;
     ctx.body = {
       message: '操作失败',
       data: e,

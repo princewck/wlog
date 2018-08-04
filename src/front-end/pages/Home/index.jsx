@@ -7,7 +7,7 @@ import './style.scss';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actionCreators from '../../actions';
-
+import banner from '../../assets/images/banner.png';
 
 class Home extends Component {
 
@@ -21,6 +21,10 @@ class Home extends Component {
     return (
       <div className="wlog-home-page">
         <NavBar isLogin={isLogin}/>
+        <div className="banner" style={{backgroundImage: `url(${banner})`}}>
+          <h1>江南好，风景旧曾谙</h1>
+          <p>李美丽 信永中和会计师事务所审计专员</p>
+        </div>
         <div className="article-list">
           <ArticleList list={articles} loading={loading} />
         </div>

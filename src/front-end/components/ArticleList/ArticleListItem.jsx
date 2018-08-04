@@ -17,10 +17,10 @@ class ArticleListItem extends Component {
         }}
       >
         <div className="title"><Link to={`/post/${_id}`} >{ title }</Link></div>
-        <div className="meta">{ moment(created_at).format('YYYY-MM-DD HH:mm') }</div>
         <div className="content">
         { getInnerText(content) }
         </div>
+        <div className="meta">{ moment(created_at).format('YYYY-MM-DD HH:mm') }</div>
         <div className="more"></div>
       </div>
     );

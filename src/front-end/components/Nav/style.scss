@@ -10,10 +10,11 @@
   margin-right: auto;
   &-wrapper {
     width: 100%;
-    height: 200px;
+    height: 100px;
     vertical-align: middle;
     text-align: center;
     position: relative;
+    background: #fff;
     &:after {
       content: '';
       width: 200%;
@@ -32,13 +33,13 @@
   }
 
   &-logo {
-    flex: 0 0 auto;
-    font-size: 40px;
-    font-weight: normal;
-    align-items: center;
+    height: 100%;
     display: flex;
     align-items: center;
-    padding-right: 30px;
+    > img {
+      height: 80px;
+      margin-left: -20px;
+    }
   }
 
   > ul {
@@ -47,7 +48,7 @@
     flex: auto;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
     > li {
       display: inline-block;
       margin-right: 25px;
@@ -59,8 +60,20 @@
         transition: all .3s ease;
         &:hover {
           color: $nav-hover-color;
+          cursor: pointer;
         }
       }
+    }
+  }
+
+  .user-info {
+    float: right;
+    margin-right: 45px;
+    display: flex;
+    align-items: center;
+    > svg {
+      width: 22px;
+      height: 22px;
     }
   }
 

@@ -89,9 +89,9 @@ function findById(collectionName, id) {
   });
 }
 
-function findByPage(collectionName, conditions = {}, page = 1, rows = 20, options) {
+function findByPage(collectionName, conditions = {}, page = 1, rows = 20, options, sort={}) {
   const skip = rows * (page - 1);
-  return find(collectionName, conditions, null, skip, rows, options)
+  return find(collectionName, conditions, sort, skip, rows, options)
     .then((list) => {
       return connect().then(db => {
         return new Promise((resolve, reject) => {
@@ -106,7 +106,7 @@ function findByPage(collectionName, conditions = {}, page = 1, rows = 20, option
                   totalCount: count,
                 };
                 resolve(Object.assign({}, pagination, {
-                  data: list,
+                  data: list && list.reverse(),
                 }));
               }
               db.close();
