@@ -71,3 +71,13 @@
     }
   }
 }
+
+.article-list-loading {
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 18px;
+  color: #ddd;
+}

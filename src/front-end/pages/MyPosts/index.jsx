@@ -22,7 +22,13 @@ class MyPosts extends Component {
       <div className="wlog-home-page">
         <NavBar isLogin={isLogin}/>
         <div className="article-list">
-          <ArticleList list={articles} loading={loading} />
+          {
+            articles.length ? (
+              <ArticleList list={articles} loading={loading} />
+            ) : (
+              <div className="no-articles">暂无文章～</div>
+            )
+          }
         </div>
         <ScrollTop />
         <Footer />

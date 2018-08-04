@@ -3,6 +3,7 @@ const authService = require('../service/authService');
 
 const create = async (ctx, next) => {
   const article = ctx.request.body;
+  const user = await getUser(ctx);
   if (!article) {
     ctx.status = 422;
   } else if (!article.title) {
@@ -16,6 +17,7 @@ const create = async (ctx, next) => {
       message: '内容不能为空！'
     };
   } else {
+    article.author = user._id;
     const res = await articleService.update(article);
     ctx.body = res;
   }
@@ -38,10 +40,7 @@ const list = async (ctx, next) => {
 
 const listMy = async (ctx, next) => {
   const page = ctx.params.page;
-  const params = ctx.request.body;
-  const { token = '' } = params;
-  console.log('token====>', token);
-  const user = await authService.verify(token);  
+  const user = await getUser(ctx);
   if (!user || !user._id) {
     ctx.body = {
       message: '请登录后操作',
@@ -77,6 +76,13 @@ const get = async (ctx, next) => {
   }
 }
 
+
+async function getUser(ctx) {
+  const headers = ctx.headers;
+  const { authorization: token = '' } = headers;
+  const user = await authService.verify(token);  
+  return user;
+}
 
 module.exports = {
   create,

@@ -13,7 +13,7 @@ class ArticleList extends Component {
         </div>
         {
           loading
-            ? <li className="article-list-item-wrapper" style={{ textAlign: 'center' }}>加载中...</li>
+            ? <div className="article-list-loading" style={{ textAlign: 'center' }}>加载中...</div>
             : articles.map((article, index) => {
                 return <ArticleListItem key={index} index={index} {...article} />;
             })
