@@ -1,10 +1,12 @@
 .wlog-article {
-    width: 900px;
+    width: 1200px;
     margin-left: auto;
     margin-right: auto;
     word-break: break-all;
     font-size: 14px;
     font-weight: 400;
+    background: #fff;
+    padding: 25px 30px 42px;
   &-wrapper {
     width: 100%;
     padding: 25px 16px;
@@ -36,6 +38,10 @@
     font-weight: 200;
     p,h1,h2,h3,h4,h5,h6 {
       margin-top: 10px;
+    }
+
+    .tui-editor-contents {
+      font-size: 16px;
     }
   }
   &-footer {

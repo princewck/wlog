@@ -28,7 +28,7 @@ class Article extends Component {
         <Nav />
         {
           loading
-            ? <div style={{minHeight: '300px', textAlign: 'center'}}>加载中...</div>
+            ? <div className="article-loading">加载中...</div>
             : <Detail article={article} />
         }
         <Footer />

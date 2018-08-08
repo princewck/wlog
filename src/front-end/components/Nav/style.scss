@@ -1,6 +1,6 @@
 @import '../../assets/styles/variables';
 .wlog-navbar {
-  width: 900px;
+  width: 1200px;
   display: inline-block;
   text-align: left;
   height: 100%;
@@ -94,7 +94,7 @@
       transform: translateY(0);
     }
     > div {
-      width: 900px;
+      width: 1200px;
       height: 100%;
       display: block;
       text-align: left;
@@ -124,6 +124,13 @@
     &-logo {
       display: inline-block;
       margin-right: 50px;
+      height: 60px;
+      vertical-align: middle;
+      > img {
+        display: inline-block;
+        height: 100%;
+        line-height: 0;
+      }
     }
     &-search {
       float: right;

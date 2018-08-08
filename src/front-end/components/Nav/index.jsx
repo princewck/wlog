@@ -78,7 +78,7 @@ class Nav extends Component {
         })}>
           <div>
             <div className="wlog-navbar-sticky-logo">
-              PRINCEWCK的网站 {this.state.sticky}
+              <img src={logo} />
             </div>
             <ul>
               {
