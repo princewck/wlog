@@ -28,9 +28,7 @@ module.exports = merge(baseConfig, {
       allChunks: true,
     }),
     new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false,
-      },
+      compress: true,
       sourceMap: true,
     }),
   ],
