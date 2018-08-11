@@ -3,6 +3,9 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
 import * as actions from '../../actions/login';
 import './style.scss';
+import login_bg1 from '../../assets/images/login_bg1.jpg';
+import login_bg2 from '../../assets/images/login_bg2.jpg';
+import logo from '../../assets/images/logo.png';
 
 class Login extends Component {
 
@@ -16,37 +19,44 @@ class Login extends Component {
       doLogin,
       isLogin,
     } = this.props;
+    const bg = +new Date() % 2 ? login_bg1 : login_bg2;
     return isLogin ? <Redirect to="/posts" /> :
-      <div className="login-page">
-        <form onSubmit={doLogin}>
-          <div className="form-group">
-            <label>
-              用户名:
-            <input
-                type="text"
-                value={username}
-                onChange={onChangeUsername}
-                placeholder="请输入用户名" /
-              >
-            </label>
+      <div className="login-page" style={{ backgroundImage: `url(${bg})` }}>
+        <div className="login-form">
+          <div className="logo">
+            <img src={logo} />
+            用户登录
           </div>
-          <div className="form-group">
-            <label>
-              密码:
-            <input
-                type="password"
-                placeholder="请输入密码"
-                value={password}
-                onChange={onChangePassword}
-              />
-            </label>
-          </div>
-          <div className="form-group">
-            <label>
-            <input type="submit" value="登陆" onClick={doLogin} />
-            </label>
-          </div>
-        </form>
+          <form onSubmit={doLogin}>
+            <div className="form-group clearfix">
+              <label className="clearfix">
+                <span>用户名:</span>
+                <input
+                  type="text"
+                  value={username}
+                  onChange={onChangeUsername}
+                  placeholder="请输入用户名" /
+                >
+              </label>
+            </div>
+            <div className="form-group clearfix">
+              <label>
+                <span>密码:</span>
+                <input
+                  type="password"
+                  placeholder="请输入密码"
+                  value={password}
+                  onChange={onChangePassword}
+                />
+              </label>
+            </div>
+            <div className="form-group submit clearfix">
+              <label>
+                <input type="submit" value="登陆" onClick={doLogin} />
+              </label>
+            </div>
+          </form>
+        </div>
       </div>;
   }
 }

@@ -14,6 +14,7 @@ import { createStore, applyMiddleware } from 'redux';
 import reducers from './reducers';
 import asyncFetch from './middlewares/asyncFetch';
 import 'animate.css';
+import './assets/styles/layout.scss';
 
 const createStoreWithMiddleware = applyMiddleware(asyncFetch)(createStore);
 const store = createStoreWithMiddleware(reducers, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
