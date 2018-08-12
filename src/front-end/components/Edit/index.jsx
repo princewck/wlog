@@ -3,6 +3,7 @@ import { findDOMNode } from 'react-dom';
 import conf from './tinymce';
 import ImageCropper from '../ImageCropper';
 import './style.scss';
+import upload from '../../utils/upload';
 
 class Edit extends Component {
 
@@ -15,12 +16,12 @@ class Edit extends Component {
 
   componentDidMount() {
     const { config = {}, onContentChange, initArticle = {} } = this.props;
-    console.log(conf, config);
     tinymce.init({
       selector: 'textarea',
       ...conf,
       ...config,
       setup: (editor) => {
+        this.editor = editor;
         conf.setup && conf.setup(editor);
         if (initArticle.content) {
           editor.setContent(initArticle.content);
@@ -37,6 +38,20 @@ class Edit extends Component {
     });
   }
 
+  onCrop = (result) => {
+    const { editor } = this;
+    this.setState({
+      showModal: false,
+    });
+    editor.insertContent(editor.dom.createHTML('img', { src: result.url }));
+  }
+
+  cancel = () => {
+    this.setState({
+      showModal: false,
+    });
+  }
+
   render() {
     const { showModal } = this.state;
     return (
@@ -45,7 +60,13 @@ class Edit extends Component {
           <textarea></textarea>
         </div>
         {
-          showModal ? <ImageCropper></ImageCropper> : null
+          showModal ? 
+          <ImageCropper 
+            uploadAfterCrop 
+            upload={upload} 
+            onCrop={this.onCrop}
+            onCancel={this.cancel}
+          ></ImageCropper> : null
         }
       </Fragment>
     );

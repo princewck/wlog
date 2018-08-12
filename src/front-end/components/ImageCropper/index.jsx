@@ -35,7 +35,6 @@ class ImageCropper extends Component {
 
   onImgLoad = (imgWidth, imgHeight) => {
     const { width, height } = this.container.getBoundingClientRect();
-    console.log(imgWidth, imgHeight, width, height);
     let fitWidth, fitHeight;
     if (imgWidth/imgHeight > width/height) {
       fitWidth =  width;
@@ -44,7 +43,6 @@ class ImageCropper extends Component {
       fitHeight = height;
       fitWidth = height * (imgWidth / imgHeight);
     }
-    console.log(fitWidth, fitHeight);
     this.setState({
       imageWrapperStype: {
         width: fitWidth,
@@ -64,7 +62,7 @@ class ImageCropper extends Component {
   onCrop = () => {
     const { onCrop, uploadAfterCrop, upload } = this.props;
     if (uploadAfterCrop && onCrop) {
-      return upload(dataURLtoBlob(this.cropper.crop())).then(url => {
+      return upload(null, dataURLtoBlob(this.cropper.crop())).then(url => {
         onCrop(url, this.cropper.values());
       });
     } else if (onCrop) {

@@ -1,7 +1,7 @@
 import axios from 'axios';
 axios.interceptors.response.use(function(response){
   return response;
-},function(error){
+}, function(error){
   if (error.response.status === 401) {
     localStorage.setItem('user', null);
     window.location.href = '/login';

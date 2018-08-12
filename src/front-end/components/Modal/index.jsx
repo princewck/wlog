@@ -15,7 +15,6 @@ class Modal extends Component {
   }
 
   componentWillUnmount() {
-    unmountComponentAtNode(this.div);
     this.div.remove();
   }
 

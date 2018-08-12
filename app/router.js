@@ -5,6 +5,7 @@ const articleController = require('./controller/articleController');
 const authController = require('./controller/authController');
 const tagController = require('./controller/tagController');
 const checkAuth = require('./middleware/auth');
+const ossController = require('./controller/ossController');
 
 const router = new Router();
 
@@ -32,4 +33,7 @@ router.post('/decode', authController.decode)
 router.post('/tag', tagController.create);
 router.put('/tag/:id', tagController.update);
 router.get('/tags/:userId', tagController.list);
+
+router.get('/aliyun_sts', ossController.getCred, checkAuth);
+
 module.exports = router;

@@ -16,7 +16,6 @@ const create = async (ctx, next) => {
         ctx.status = 422;
         ctx.body = {message: '标签已存在！'}
       } else {
-        console.log(1111);
         const tag = await tagService.create(name, ctx.$user._id);
         ctx.body = tag;
       }
