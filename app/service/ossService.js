@@ -3,7 +3,20 @@
  *  https://www.alibabacloud.com/help/zh/doc-detail/32077.htm?spm=a2c63.p38356.b99.230.48747557eMRsTW */
 const OSS = require('ali-oss');
 const path = require('path');
-const config = require('../ali-oss');
+let config 
+
+try {
+  config = require('../ali-oss');
+} catch (e) {
+  try {
+    config = require('/opt/ali-oss');
+  } catch (e2) {
+    console.log('oss sts: ak sk 配置文件缺失');
+    console.log(e2);
+  }
+}
+
+
 
 const sts = new OSS.STS(config);
 

@@ -1,7 +1,16 @@
 const MongoClient = require('mongodb').MongoClient;
 const ObjectId = require('mongodb').ObjectId;
 const url = "mongodb://localhost:27017/runoob";
-const dbname = 'wlog';
+let dbname = 'wlog';
+
+try {
+  const config = require('/opt/wlog');
+  if (config.dbname) {
+    dbname = config.dbname;
+  }
+} catch (e) {
+
+}
 
 // close db after use manually
 function connect() {

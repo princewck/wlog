@@ -1,0 +1,1 @@
+scp -r ./app/* root@hk:/root/zhoutg/node && scp ./package.json root@hk:/root/zhoutg/node && ssh hk 'cd /root/zhoutg/node && WLOG_PORT=8082 forever start -l `date +%Y-%m-%d_%H:%M:%S_wlog_ztg.log` ./app.js && forever logs'
