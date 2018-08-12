@@ -6,11 +6,7 @@ import { selectFiles } from '../../../utils';
       icon: 'image',
       tooltip: '插入图片',
       onclick() {
-        selectFiles({
-          accept: 'image/*'
-        }, result => {
-          console.log(result);
-        });
+        editor.fire('upload_image');
       }
     });
 

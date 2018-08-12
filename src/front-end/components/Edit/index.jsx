@@ -1,12 +1,20 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { findDOMNode } from 'react-dom';
 import conf from './tinymce';
+import ImageCropper from '../ImageCropper';
 import './style.scss';
 
 class Edit extends Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      showModal: false,
+    };
+  }
+
   componentDidMount() {
-    const { config = {} , onContentChange, initArticle = {}} = this.props;
+    const { config = {}, onContentChange, initArticle = {} } = this.props;
     console.log(conf, config);
     tinymce.init({
       selector: 'textarea',
@@ -20,15 +28,26 @@ class Edit extends Component {
         editor.on('keyup', (e) => {
           onContentChange(editor.getContent());
         });
+        editor.on('upload_image', () => {
+          this.setState({
+            showModal: true,
+          });
+        });
       },
     });
   }
 
   render() {
+    const { showModal } = this.state;
     return (
-      <div className="wlog-editor">
-        <textarea></textarea>
-      </div>
+      <Fragment>
+        <div className="wlog-editor">
+          <textarea></textarea>
+        </div>
+        {
+          showModal ? <ImageCropper></ImageCropper> : null
+        }
+      </Fragment>
     );
   }
 }
