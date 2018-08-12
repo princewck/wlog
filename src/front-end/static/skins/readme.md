@@ -1,0 +1,1 @@
+### this is the skin styles for tinymce

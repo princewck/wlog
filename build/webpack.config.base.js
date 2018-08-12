@@ -132,6 +132,12 @@ module.exports = {
       collections: true,
       paths: true,
     }),
+    new CopyWebpackPlugin([
+      {
+        from: path.resolve(__dirname, '../src/front-end/static'),
+        to: path.resolve(__dirname, '../dist/static')
+      }
+    ]),
     // clean the dist
     new CleanWebpackPlugin(['dist'], {
       root: path.join(__dirname, '../'),

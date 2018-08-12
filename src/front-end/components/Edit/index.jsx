@@ -7,11 +7,13 @@ class Edit extends Component {
 
   componentDidMount() {
     const { config = {} , onContentChange, initArticle = {}} = this.props;
+    console.log(conf, config);
     tinymce.init({
       selector: 'textarea',
       ...conf,
       ...config,
       setup: (editor) => {
+        conf.setup && conf.setup(editor);
         if (initArticle.content) {
           editor.setContent(initArticle.content);
         }
