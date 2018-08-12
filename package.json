@@ -7,6 +7,7 @@
     "dev": "NODE_ENV=local webpack-dev-server --config ./build/webpack.config.dev.js",
     "build": "NODE_ENV=production webpack --config ./build/webpack.config.prod.js",
     "deploy": "npm run build && scp -r ./dist/* root@hk:/root/wlog-front",
+    "deploy2": "npm run build && scp -r ./dist/* root@hk:/root/zhoutg/front",
     "test": "echo \"Error: no test specified\" && exit 1",
     "deployService": "scp -r ./src/back-end/* root@hk:/root/wlog-node/src && scp ./package.json root@hk:/root/wlog-node && ssh hk 'cd wlog-node && forever stop ./src/app.js && forever start -l `date +%Y-%m-%d_%H:%M:%S_wlog.log` ./src/app.js && forever logs'"
   },
