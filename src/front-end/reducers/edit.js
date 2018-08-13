@@ -8,6 +8,7 @@ import {
   POST_ARTICLE_ERROR,
 } from '../constants/editTypes';
 
+
 const initialState = {
   article: {},
   posting: false,
@@ -60,8 +61,8 @@ export default function editReducer(state = initialState, action) {
       };
     case POST_ARTICLE_DONE:
       const res = action.payload;
-      const id = _.get(res, 'data.value._id', null);
-      window.location.href = `/post/${id}`;
+      const id = res || null;
+      // window.location.href = `/post/${id}`;
       return {
         article: {},
         posting: false,

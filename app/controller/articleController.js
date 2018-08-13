@@ -18,8 +18,14 @@ const create = async (ctx, next) => {
     };
   } else {
     article.author = user._id;
-    const res = await articleService.update(article);
-    ctx.body = res;
+    let res;
+    console.log(article);
+    if (article.id) {
+      res = await articleService.update(article);
+    } else {
+      res = await articleService.create(article);
+    }
+    ctx.body = res&&res.insertedId;
   }
   next();
 }
@@ -63,7 +69,7 @@ const listMy = async (ctx, next) => {
 
 const get = async (ctx, next) => {
   const id = ctx.params.id;
-  if (!id) return ctx.status = 404;
+  if (!id || id == 'null') return ctx.status = 404;
   try {
     const article = await articleService.get(id);
     ctx.body = article;

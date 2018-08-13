@@ -21,6 +21,8 @@ import {
   SET_TYPE,
 } from '../constants/editTypes';
 
+import { push } from 'connected-react-router';
+
 export const fetchArticles = (page) => ({
   type: 'FETCH_ARTICLES',
   types: [FETCH_ARTICLES_START, FETCH_ARTICLES_DONE, FETCH_ARTICLES_ERROR],
@@ -49,6 +51,9 @@ export const postArticle = () => ({
     const {id = null} = store.login;
     return ({...store.edit.article, author: id});
   },
+  onDone: (store, data) => {
+    store.dispatch(push(data ? `/post/${data}` : '/'));
+  }
 });
 
 export const setArticleFormat = (type = 1) => ({

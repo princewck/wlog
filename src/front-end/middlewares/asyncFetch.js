@@ -15,7 +15,7 @@ export default store => next => action => {
     store.dispatch({
       type: action.types[0],
     });
-    const { url, data, method = 'GET' } = action;
+    const { url, data, method = 'GET', onDone } = action;
     const requestData = data instanceof Function ? data(store.getState()) : data;
     const loginState = store.getState()['login'] || {};
     axios({
@@ -30,6 +30,7 @@ export default store => next => action => {
         type: action.types[1],
         payload: res.data,
       });
+      onDone && onDone(store, res.data);
     }, (e) => {
       store.dispatch({
         type: action.types[2],
