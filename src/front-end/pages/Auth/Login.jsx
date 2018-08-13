@@ -7,6 +7,8 @@ import login_bg1 from '../../assets/images/login_bg1.jpg';
 import login_bg2 from '../../assets/images/login_bg2.jpg';
 import logo from '../../assets/images/logo.png';
 
+let bg = null;
+
 class Login extends Component {
 
   render() {
@@ -19,7 +21,7 @@ class Login extends Component {
       doLogin,
       isLogin,
     } = this.props;
-    const bg = +new Date() % 2 ? login_bg1 : login_bg2;
+    bg = bg ||  +new Date() % 2 ? login_bg1 : login_bg2;
     return isLogin ? <Redirect to="/posts" /> :
       <div className="login-page" style={{ backgroundImage: `url(${bg})` }}>
         <div className="login-form">

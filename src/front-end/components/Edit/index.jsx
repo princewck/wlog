@@ -40,10 +40,12 @@ class Edit extends Component {
 
   onCrop = (result) => {
     const { editor } = this;
+    const { onContentChange } = this.props;
     this.setState({
       showModal: false,
     });
     editor.insertContent(editor.dom.createHTML('img', { src: result.url }));
+    onContentChange(editor.getContent());
   }
 
   cancel = () => {
