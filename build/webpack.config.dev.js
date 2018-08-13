@@ -19,6 +19,7 @@ module.exports = merge(baseConfig, {
     compress: false,
     port: 3000,
     quiet: false,
+    host: '0.0.0.0',
     historyApiFallback: true,
     headers: { 'Access-Control-Allow-Origin': '*' },
     proxy: {
