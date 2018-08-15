@@ -20,7 +20,7 @@ const create = async (ctx, next) => {
     article.author = user._id;
     let res;
     console.log(article);
-    if (article.id) {
+    if (article._id) {
       res = await articleService.update(article);
     } else {
       res = await articleService.create(article);
