@@ -9,6 +9,7 @@ const articleFilter = (article) => _.pick(article, [
   'summary',
   'content',
   'author',
+  'format',
   'created_at',
   'updated_at',
   'comments',

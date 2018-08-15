@@ -24,7 +24,7 @@ class MyPosts extends Component {
         <div className="article-list">
           {
             articles.length ? (
-              <ArticleList list={articles} loading={loading} />
+              <ArticleList list={articles} loading={loading} enableEdit />
             ) : (
               <div className="no-articles">暂无文章～</div>
             )

@@ -6,12 +6,16 @@ import {
   POST_ARTICLE_START,
   POST_ARTICLE_DONE,
   POST_ARTICLE_ERROR,
+  INIT_EDIT_ARTICLE_START,
+  INIT_EDIT_ARTICLE_SUCCESS,
+  INIT_EDIT_ARTICLE_DONE,  
 } from '../constants/editTypes';
 
 
 const initialState = {
   article: {},
   posting: false,
+  loading: false,
 };
 
 function parseArticleType(t) {
@@ -62,7 +66,6 @@ export default function editReducer(state = initialState, action) {
     case POST_ARTICLE_DONE:
       const res = action.payload;
       const id = res || null;
-      // window.location.href = `/post/${id}`;
       return {
         article: {},
         posting: false,
@@ -73,6 +76,22 @@ export default function editReducer(state = initialState, action) {
         ...state,
         posting: false,
       };
+    case INIT_EDIT_ARTICLE_START:
+      return {
+        ...state,
+        loading: true,
+      }
+    case INIT_EDIT_ARTICLE_SUCCESS:
+      const { data } = action.payload;
+      return {
+        ...state,
+        article: data,
+      }
+    case INIT_EDIT_ARTICLE_DONE:
+      return {
+        ...state,
+        loading: false,
+      }
     default:
       return state;
   }

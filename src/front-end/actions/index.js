@@ -19,6 +19,9 @@ import {
   CHANGE_CONTENT,
   CHANGE_TITLE,
   SET_TYPE,
+  INIT_EDIT_ARTICLE_START,
+  INIT_EDIT_ARTICLE_SUCCESS,
+  INIT_EDIT_ARTICLE_DONE,
 } from '../constants/editTypes';
 
 import { push } from 'connected-react-router';
@@ -70,3 +73,12 @@ export const changeTitle = title => ({
   type: CHANGE_TITLE,
   payload: title,
 });
+
+export const initEditArticle = (id) => ({
+  types: [
+    INIT_EDIT_ARTICLE_START,
+    INIT_EDIT_ARTICLE_SUCCESS,
+    INIT_EDIT_ARTICLE_DONE
+  ],
+  url: `/api/post/${id}`,
+})

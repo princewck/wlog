@@ -22,7 +22,7 @@ class Article extends Component {
 
   render() {
     const { article, loading } = this.props;
-    const Detail = article.format === 1 ? ArticleDetail : Markdown;
+    const Detail = article.format === 2 ? Markdown : ArticleDetail;
     return (
       <div>
         <Nav />

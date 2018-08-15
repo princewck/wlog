@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import * as actions from '../../actions';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import Nav from '../../components/Nav';
 import Footer from '../../components/Footer';
 import EditComp from '../../components/Edit';
@@ -11,7 +12,19 @@ const config = {
   width: '100%',
 };
 
+@withRouter
 class Edit extends Component {
+
+
+  constructor(props) {
+    super(props);
+    const { match = {}, initEdit } = this.props;
+    const { id } = match.params;
+    if (id) {
+      initEdit(id);
+    }
+
+  }
 
   componentDidMount() {
     const { setFormat } = this.props;
@@ -47,7 +60,8 @@ const mapDispatchToProps = dispatch => {
     onPost: () => { dispatch(actions.postArticle()) },
     onContentChange: (content) => { dispatch(actions.changeContent(content)) },
     onTitleChange: (e) => { dispatch(actions.changeTitle(e.target.value)) },
-    setFormat: (type) => { dispatch(actions.setArticleFormat(type)); }
+    setFormat: (type) => { dispatch(actions.setArticleFormat(type)); },
+    initEdit: id => { dispatch(actions.initEditArticle(id)) }
   };
 }
 

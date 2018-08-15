@@ -6,8 +6,7 @@ import getInnerText from '../../utils/getInnerText';
 
 class ArticleListItem extends Component {
   render() {
-    const { title, content, author, created_at, index, _id } = this.props;
-
+    const { title, content, author, format, created_at, index, _id, enableEdit } = this.props;
     return (
       <div 
         className="article-list-item-wrapper animated fadeIn"
@@ -21,7 +20,7 @@ class ArticleListItem extends Component {
         { getInnerText(content) }
         </div>
         <div className="meta">{ moment(created_at).format('YYYY-MM-DD HH:mm') }</div>
-        <div className="more"></div>
+        <div className="more"><Link to={`/edit/${format || 1}/${_id}`}>修改</Link></div>
       </div>
     );
   }

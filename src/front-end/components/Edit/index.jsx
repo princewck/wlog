@@ -38,6 +38,16 @@ class Edit extends Component {
     });
   }
 
+  componentWillReceiveProps(nextProps) {
+    const { initArticle } = nextProps;
+    if (this.editor) {
+      const content = this.editor.getContent();
+      if (initArticle.content && (initArticle.content !== content)) {
+        this.editor.setContent(initArticle.content);
+      }
+    }
+  }
+
   onCrop = (result) => {
     const { editor } = this;
     const { onContentChange } = this.props;
