@@ -37,7 +37,8 @@ const create = async (ctx, next) => {
 }
 
 const list = async (ctx, next) => {
-  const page = ctx.params.page;
+  let page = ctx.query.page;
+  if (isNaN(page)) page = 1;
   try {
     const data = await articleService.findArticles(page);
     ctx.body = data;

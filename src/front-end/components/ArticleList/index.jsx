@@ -12,7 +12,7 @@ class ArticleList extends Component {
           loading
             ? <div className="article-list-loading" style={{ textAlign: 'center' }}>加载中...</div>
             : articles.map((article, index) => {
-                return <ArticleListItem enableEdit={enableEdit} key={index} index={index} {...article} />;
+                return <ArticleListItem enableEdit={enableEdit} key={index} index={0} {...article} />;
             })
         }
       </div>

@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import ArticleList from '../../components/ArticleList';
-import NavBar from '../../components/Nav';
-import ScrollTop from '../../components/ScrollTop';
-import Footer from '../../components/Footer';
 import './style.scss';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { Pagination } from '../../components';
 import * as actionCreators from '../../actions';
 import banner from '../../assets/images/banner.png';
 
@@ -16,8 +14,13 @@ class Home extends Component {
     actions.fetchArticles();
   }
 
+  paginate = (page) => {
+    const { actions } = this.props;
+    actions.fetchArticles(page);
+  }
+
   render() {
-    const { articles, loading, isLogin } = this.props;
+    const { articles, loading, pagination } = this.props;
     return (
       <div className="wlog-home-page">
         {/* <NavBar isLogin={isLogin}/> */}
@@ -27,6 +30,7 @@ class Home extends Component {
         </div>
         <div className="article-list">
           <ArticleList list={articles} loading={loading} />
+          <Pagination data={pagination} onChange={this.paginate}></Pagination>
         </div>
         {/* <ScrollTop /> */}
         {/* <Footer /> */}
@@ -40,6 +44,7 @@ const mapStateToProps = state => {
     articles: state.articleList.articleList,
     loading: state.articleList.loading,
     isLogin: state.login && state.login.token,
+    pagination: state.articleList.pagination,
   };
 };
 

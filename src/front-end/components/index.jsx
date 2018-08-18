@@ -9,6 +9,7 @@ import Modal from './Modal';
 import Nav from './Nav';
 import ScrollTop from './ScrollTop';
 import Svg from './Svg';
+import Pagination from './Pagination';
 
 export {
   Article,
@@ -22,4 +23,5 @@ export {
   Nav,
   ScrollTop,
   Svg,
+  Pagination,
 };

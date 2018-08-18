@@ -26,10 +26,10 @@ import {
 
 import { push } from 'connected-react-router';
 
-export const fetchArticles = (page) => ({
+export const fetchArticles = (page = 1) => ({
   type: 'FETCH_ARTICLES',
   types: [FETCH_ARTICLES_START, FETCH_ARTICLES_DONE, FETCH_ARTICLES_ERROR],
-  url: '/api/posts?page=1',
+  url: `/api/posts?page=${page}`,
   data: {},
 });
 

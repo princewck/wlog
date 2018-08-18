@@ -4,6 +4,7 @@ import {
   FETCH_ARTICLES_DONE,
   FETCH_ARTICLES_ERROR
 } from '../constants/articleTypes';
+import Pagination from '../utils/pagination';
 
 
 const initialState = {
@@ -27,6 +28,7 @@ export default function articleReducer(state = initialState, action) {
       return {
         ...state,
         articleList: res.data,
+        pagination: new Pagination(res),
         loading: false,
       };
       break;
