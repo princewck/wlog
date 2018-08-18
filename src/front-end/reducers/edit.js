@@ -64,8 +64,6 @@ export default function editReducer(state = initialState, action) {
         posting: true,
       };
     case POST_ARTICLE_DONE:
-      const res = action.payload;
-      const id = res || null;
       return {
         article: {},
         posting: false,

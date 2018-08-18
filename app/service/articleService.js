@@ -16,14 +16,16 @@ const articleFilter = (article) => _.pick(article, [
 ]);
 
 const create = (article= {}) => {
+  article.created_at = +new Date();
   return db.insertOne(COLLECTION, articleFilter(article));
 }
 
-const remove = (id) => {
+const remove = (id, user) => {
   return db.findOneAndDelete(COLLECTION, {_id: id});
 }
 
 const update = (article) => {
+  article.updated_at = +new Date();
   return db.updateOne(COLLECTION, {_id: article._id}, {$set: articleFilter(article)});
 }
 

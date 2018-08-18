@@ -31,6 +31,7 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
+	min-height: 100%;
 }
 ol, ul {
 	list-style: none;
@@ -49,5 +50,7 @@ table {
 }
 
 #root {
-  background-image: linear-gradient(to bottom, #f8f8f8, #eaeaea);
+	background-image: linear-gradient(to bottom, #f8f8f8, #eaeaea);
+	padding: 100px 0 180px;
+	min-height: 100%;
 }

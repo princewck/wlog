@@ -9,7 +9,7 @@ const ossController = require('./controller/ossController');
 
 const router = new Router();
 
-router.use(['/tag'], checkAuth);
+router.use(['/tag', '/post', '/my/posts', '/tag', '/tag/:id', '/tags/:userId', '/aliyun_sts'], checkAuth);
 
 router.post('/test/:id', testController.test);
 
@@ -18,11 +18,11 @@ router.get('/user/:id', userController.get);
 router.post('/user', userController.create);
 
 
-router.post('/post', articleController.create, checkAuth);
+router.post('/post', articleController.create);
 router.get('/posts', articleController.list);
 router.get('/post/:id', articleController.get);
 
-router.get('/my/posts', articleController.listMy, checkAuth);
+router.get('/my/posts', articleController.listMy);
 
 
 router.post('/login', authController.login);
@@ -34,6 +34,6 @@ router.post('/tag', tagController.create);
 router.put('/tag/:id', tagController.update);
 router.get('/tags/:userId', tagController.list);
 
-router.get('/aliyun_sts', ossController.getCred, checkAuth);
+router.get('/aliyun_sts', ossController.getCred);
 
 module.exports = router;

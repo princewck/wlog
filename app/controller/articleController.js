@@ -3,8 +3,8 @@ const authService = require('../service/authService');
 
 const create = async (ctx, next) => {
   const article = ctx.request.body;
-  const user = await getUser(ctx);
-  if (!article) {
+  const user = ctx.$user;
+  if (!article || !user) {
     ctx.status = 422;
   } else if (!article.title) {
     ctx.status = 422;
@@ -17,15 +17,21 @@ const create = async (ctx, next) => {
       message: '内容不能为空！'
     };
   } else {
-    article.author = user._id;
     let res;
-    console.log(article);
     if (article._id) {
-      res = await articleService.update(article);
+      const old = await articleService.get(article._id);
+      if (!old || !old.author || old.author.toHexString() !== user._id.toHexString()) {
+        ctx.status = 403;
+        ctx.body = {message: '您没有修改这篇文章的权限！'}; 
+      } else {
+        res = await articleService.update(article, ctx.$user);
+        ctx.body = res&&res.value._id;
+      }
     } else {
+      article.author = user._id;
       res = await articleService.create(article);
+      ctx.body = (res&&res.insertedId || '').toString();
     }
-    ctx.body = res&&res.insertedId;
   }
   next();
 }
@@ -47,7 +53,7 @@ const list = async (ctx, next) => {
 
 const listMy = async (ctx, next) => {
   const page = ctx.params.page;
-  const user = await getUser(ctx);
+  const user = ctx.$user;
   if (!user || !user._id) {
     ctx.body = {
       message: '请登录后操作',
@@ -81,14 +87,6 @@ const get = async (ctx, next) => {
     };
     throw new Error(e);
   }
-}
-
-
-async function getUser(ctx) {
-  const headers = ctx.headers;
-  const { authorization: token = '' } = headers;
-  const user = await authService.verify(token);  
-  return user;
 }
 
 module.exports = {

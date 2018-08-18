@@ -54,8 +54,8 @@ export const postArticle = () => ({
     const {id = null} = store.login;
     return ({...store.edit.article, author: id});
   },
-  onDone: (store, data) => {
-    store.dispatch(push(data ? `/post/${data}` : '/'));
+  onDone: (store, res) => {
+    store.dispatch(push(res && res.data ? `/post/${res.data}` : '/'));
   }
 });
 

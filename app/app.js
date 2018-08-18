@@ -23,7 +23,7 @@ app
   .use(router.routes())
   .use(router.allowedMethods())
   .use(async (ctx, next) => {
-    if (ctx.status === 200 && ctx.body && !('data' in ctx.body)) {
+    if (ctx.status === 200 && ctx.body && !ctx.body.data) {
       ctx.body = {
         data: ctx.body,
       };

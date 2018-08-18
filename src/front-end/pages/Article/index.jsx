@@ -7,6 +7,7 @@ import Footer from '../../components/Footer';
 import ScrollTop from '../../components/ScrollTop';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import Content from '../../components/Content';
 import * as types from '../../constants/articleDetailTypes';
 import * as actions from '../../actions';
 
@@ -25,14 +26,15 @@ class Article extends Component {
     const Detail = article.format === 2 ? Markdown : ArticleDetail;
     return (
       <div>
-        <Nav />
-        {
-          loading
-            ? <div className="article-loading">加载中...</div>
-            : <Detail article={article} />
-        }
-        <Footer />
-        <ScrollTop />
+        {/* <Nav /> */}
+        <Content>
+          {
+            loading
+              ? <div className="article-loading">加载中...</div>
+              : <Detail article={article} />
+          }
+        </Content>
+        {/* <Footer /> */}
       </div>
     );
   }

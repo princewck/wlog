@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import ReactDOM from 'react-dom';
 import classnames from 'classnames';
+import { connect } from 'react-redux';
 import { NavLink as Link } from 'react-router-dom';
 import './style.scss';
 import logo from '../../assets/images/logo.png';
@@ -97,4 +98,6 @@ class Nav extends Component {
   }
 }
 
-export default Nav;
+export default connect((state) => ({
+  isLogin: state.login && state.login.token,
+}))(Nav);

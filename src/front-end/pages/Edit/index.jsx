@@ -35,7 +35,7 @@ class Edit extends Component {
     const { onPost, onContentChange, article = {}, onTitleChange } = this.props;
     return (
       <div>
-        <Nav />
+        {/* <Nav /> */}
         <div className="wlog-edit-page">
           <input type="text" placeholder="请输入标题" value={article.title || ''} onChange={onTitleChange} />
           <EditComp config={config} onContentChange={onContentChange} initArticle={article} />
@@ -45,7 +45,7 @@ class Edit extends Component {
             <button type="button" className="draft-btn">存草稿</button>
           </div>
         </div>
-        <Footer />
+        {/* <Footer /> */}
       </div>
     );
   }

@@ -1,4 +1,4 @@
-@import '../../assets/styles/variables';
+@import '../../styles/variables';
 .wlog-navbar {
   width: 950px;
   display: inline-block;
@@ -9,11 +9,14 @@
   margin-left: auto;
   margin-right: auto;
   &-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;    
     width: 100%;
     height: 100px;
     vertical-align: middle;
     text-align: center;
-    position: relative;
+    // position: relative;
     background: #fff;
     &:after {
       content: '';

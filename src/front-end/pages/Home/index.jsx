@@ -20,7 +20,7 @@ class Home extends Component {
     const { articles, loading, isLogin } = this.props;
     return (
       <div className="wlog-home-page">
-        <NavBar isLogin={isLogin}/>
+        {/* <NavBar isLogin={isLogin}/> */}
         <div className="banner" style={{backgroundImage: `url(${banner})`}}>
           <h1>江南好，风景旧曾谙</h1>
           <p>李美丽 信永中和会计师事务所审计专员</p>
@@ -28,8 +28,8 @@ class Home extends Component {
         <div className="article-list">
           <ArticleList list={articles} loading={loading} />
         </div>
-        <ScrollTop />
-        <Footer />
+        {/* <ScrollTop /> */}
+        {/* <Footer /> */}
       </div>
     );
   }

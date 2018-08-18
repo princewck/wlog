@@ -20,7 +20,7 @@ class MyPosts extends Component {
     const { articles, loading, isLogin } = this.props;
     return (
       <div className="wlog-home-page">
-        <NavBar isLogin={isLogin}/>
+        {/* <NavBar isLogin={isLogin}/> */}
         <div className="article-list">
           {
             articles.length ? (
@@ -30,8 +30,8 @@ class MyPosts extends Component {
             )
           }
         </div>
-        <ScrollTop />
-        <Footer />
+        {/* <ScrollTop /> */}
+        {/* <Footer /> */}
       </div>
     );
   }

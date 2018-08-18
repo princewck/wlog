@@ -18,14 +18,14 @@ class EditMD extends Component {
     const { article, onChange, onPost }  = this.props;
     return (
       <Fragment>
-        <Nav/>
+        {/* <Nav/> */}
         <Editor value={article.content} onChange={onChange}/>
         <div className="wlog-md-edit-page-operators">
           <button type="button" className="publish-btn" onClick={onPost}>发布</button>
           <button type="button" className="cancel-btn">取消</button>
           <button type="button" className="draft-btn">存草稿</button>
         </div>
-        <Footer/>
+        {/* <Footer/> */}
       </Fragment>
     );
   }
