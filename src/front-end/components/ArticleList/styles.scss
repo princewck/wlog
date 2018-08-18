@@ -66,6 +66,11 @@
         font-size: 13px;
         line-height: 1.5;
         transition: color .3s ease;
+        margin-left: 12px;
+        text-decoration: none;
+        &:nth-of-type(2) {
+          color: #ddd;
+        }
         &:hover {
           text-decoration: underline;
           color: red;

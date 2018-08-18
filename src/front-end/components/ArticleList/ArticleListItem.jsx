@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 import getInnerText from '../../utils/getInnerText';
@@ -20,7 +20,16 @@ class ArticleListItem extends Component {
         { getInnerText(content) }
         </div>
         <div className="meta">{ moment(created_at).format('YYYY-MM-DD HH:mm') }</div>
-        <div className="more"><Link to={`/edit/${format || 1}/${_id}`}>修改</Link></div>
+        <div className="more">
+        {
+          enableEdit ? (
+            <Fragment>
+              <Link to={`/edit/${format || 1}/${_id}`}>修改</Link>
+              <a>删除</a>
+            </Fragment>
+          ) : null
+        }
+        </div>
       </div>
     );
   }
