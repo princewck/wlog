@@ -17,14 +17,14 @@ class MyPosts extends Component {
   }
 
   render() {
-    const { articles, loading, isLogin } = this.props;
+    const { articles = [], loading, actions } = this.props;
     return (
       <div className="wlog-home-page">
         {/* <NavBar isLogin={isLogin}/> */}
         <div className="article-list">
           {
             articles.length ? (
-              <ArticleList list={articles} loading={loading} enableEdit />
+              <ArticleList list={articles} loading={loading} enableEdit onDelete={actions.deleteArticle} />
             ) : (
               <div className="no-articles">暂无文章～</div>
             )

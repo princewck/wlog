@@ -6,6 +6,10 @@ import {
   FETCH_MY_ARTICLES_START,
   FETCH_MY_ARTICLES_DONE,
   FETCH_MY_ARTICLES_ERROR,
+  
+  DELETE_ARTICLE_START,
+  DELETE_ARTICLE_DONE,
+  DELETE_ARTICLE_ERROR,  
 } from '../constants/articleTypes';
 import {
   FETCH_ARTICLE_START,
@@ -57,6 +61,13 @@ export const postArticle = () => ({
   onDone: (store, res) => {
     store.dispatch(push(res && res.data ? `/post/${res.data}` : '/'));
   }
+});
+
+export const deleteArticle = (id) => ({
+  type: 'DELETE_ARTICLE',
+  types: [DELETE_ARTICLE_START, DELETE_ARTICLE_DONE, DELETE_ARTICLE_ERROR],
+  url: `/api/post/${id}`,
+  method: 'DELETE',
 });
 
 export const setArticleFormat = (type = 1) => ({

@@ -90,9 +90,32 @@ const get = async (ctx, next) => {
   }
 }
 
+const remove = async (ctx, next) => {
+  const id = ctx.params.id;
+  const user = ctx.$user || {};
+  if (!id || id == null) {
+    return ctx.status = 404;
+  }
+  try {
+    const article = await articleService.get(id);
+    if (!article || `${user._id}`!== `${article.author}`) {
+      ctx.body = {message: '文章不存在或没有操作权限！'};
+      ctx.status = 403;
+    } else {
+      const res = await articleService.remove(id);
+      ctx.body = res&&res.value._id;
+    }
+  } catch (e) {
+    ctx.status = 400;
+    ctx.message = {message: '操作失败！'};
+  }
+  next();
+}
+
 module.exports = {
   create,
   list,
   listMy,
   get,
+  remove,
 };

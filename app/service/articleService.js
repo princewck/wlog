@@ -20,8 +20,8 @@ const create = (article= {}) => {
   return db.insertOne(COLLECTION, articleFilter(article));
 }
 
-const remove = (id, user) => {
-  return db.findOneAndDelete(COLLECTION, {_id: id});
+const remove = (id) => {
+  return db.updateOne(COLLECTION, {_id: id}, {$set: {status: 2}});
 }
 
 const update = (article) => {
@@ -30,11 +30,11 @@ const update = (article) => {
 }
 
 const findArticles = (page = 1) => {
-  return db.findByPage(COLLECTION, {}, page, 25, {}, {});
+  return db.findByPage(COLLECTION, {$or: [{status: {$lt: 2}}, {status: {$gt: 2}}, {status: null} ]}, page, 25, {}, {});
 }
 
 const findArticlesByUserId = (id, page = 1) => {
-  return db.findByPage(COLLECTION, {author: id}, page);
+  return db.findByPage(COLLECTION, {author: id, $or: [{status: {$lt: 2}}, {status: {$gt: 2}}, {status: null} ] }, page);
 }
 
 const get = id => db.findOne(COLLECTION, id);

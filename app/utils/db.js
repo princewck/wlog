@@ -106,7 +106,7 @@ function findByPage(collectionName, conditions = {}, page = 1, rows = 20, option
         return new Promise((resolve, reject) => {
           const dbase = db.db(dbname);
           dbase.collection(collectionName)
-            .count({}, null, (err, count) => {
+            .count(conditions, null, (err, count) => {
               if (err) reject(err);
               else {
                 pagination = {

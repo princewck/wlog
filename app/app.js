@@ -21,15 +21,16 @@ try {
 app
   .use(koaBody())
   .use(router.routes())
-  .use(router.allowedMethods())
   .use(async (ctx, next) => {
+    debugger;
     if (ctx.status === 200 && ctx.body && !ctx.body.data) {
       ctx.body = {
         data: ctx.body,
       };
     }
     await next();
-  });
+  })
+  .use(router.allowedMethods());
 
 app.on('error', (err, ctx) => {
   console.error('server error', err, ctx);

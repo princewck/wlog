@@ -21,6 +21,7 @@ router.post('/user', userController.create);
 router.post('/post', articleController.create);
 router.get('/posts', articleController.list);
 router.get('/post/:id', articleController.get);
+router.delete('/post/:id', articleController.remove);
 
 router.get('/my/posts', articleController.listMy);
 

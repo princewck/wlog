@@ -5,6 +5,16 @@ import getInnerText from '../../utils/getInnerText';
 
 
 class ArticleListItem extends Component {
+
+  onDelete = () => {
+    const { onDelete, _id } = this.props;
+    if (onDelete) {
+      onDelete(_id);
+    } else {
+      console.error('onDelete callback is not specified!');
+    }
+  }
+
   render() {
     const { title, content, author, format, created_at, index, _id, enableEdit } = this.props;
     return (
@@ -25,7 +35,7 @@ class ArticleListItem extends Component {
           enableEdit ? (
             <Fragment>
               <Link to={`/edit/${format || 1}/${_id}`}>修改</Link>
-              <a>删除</a>
+              <a onClick={ this.onDelete }>删除</a>
             </Fragment>
           ) : null
         }
