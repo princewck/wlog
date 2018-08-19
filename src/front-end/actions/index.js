@@ -40,7 +40,7 @@ export const fetchArticles = (page = 1) => ({
 export const fetchMyArticles = (page = 1) => ({
   type: 'FETCH_MY_ARTICLES',
   types: [FETCH_MY_ARTICLES_START, FETCH_MY_ARTICLES_DONE, FETCH_MY_ARTICLES_ERROR],
-  url: '/api/my/posts?page=1',
+  url: `/api/my/posts?page=${page}`,
   data: {},
 });
 

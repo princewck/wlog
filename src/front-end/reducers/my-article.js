@@ -7,6 +7,7 @@ import {
   DELETE_ARTICLE_DONE,
   DELETE_ARTICLE_ERROR, 
 } from '../constants/articleTypes';
+import Pagination from '../utils/pagination';
 
 
 const initialState = {
@@ -31,6 +32,7 @@ export default function articleReducer(state = initialState, action) {
         ...state,
         articleList: res.data,
         loading: false,
+        pagination: new Pagination(res)
       };
       break;
     case FETCH_MY_ARTICLES_ERROR:

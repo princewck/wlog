@@ -53,7 +53,7 @@ const list = async (ctx, next) => {
 }
 
 const listMy = async (ctx, next) => {
-  const page = ctx.params.page;
+  const page = ctx.query.page;
   const user = ctx.$user;
   if (!user || !user._id) {
     ctx.body = {
