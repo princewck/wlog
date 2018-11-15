@@ -26,23 +26,32 @@ export const store = createStoreWithMiddleware(
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
+const Base = (props) => {
+  return (
+    <div style={{padding: '100px 0 180px'}}>
+      <Nav />
+      <Switch>
+        <Route exact path="/home" component={Home} />
+        <Route exact path="/posts" component={Home} />
+        <Route exact path="/mine/posts" component={MyPosts} />
+        <Route path="/post/:id" component={Article} />
+        <Route path="/edit/1/:id" component={Edit} />
+        <Route path="/edit/2/:id" component={EditMD} />
+      </Switch>
+      <Footer/>
+    </div>
+  );
+}
+
 export default (props) => {
   return (
     <Provider store={store}>
       <ConnectedRouter history={history}>
         <Fragment>
-          <Nav />
           <Switch location={location} >
-            <Route exact path="/" component={Home} />
-            <Route exact path="/posts" component={Home} />
-            <Route exact path="/mine/posts" component={MyPosts} />
             <Route exact path="/login" component={Login} />
-            <Route path="/post/:id" component={Article} />
-            <Route path="/edit/1/:id" component={Edit} />
-            <Route path="/edit/2/:id" component={EditMD} />
-            <Redirect to="/" />
+            <Route path="/" component={Base}/>
           </Switch>  
-          <Footer/>
           <ScrollTop />
         </Fragment>
       </ConnectedRouter>
