@@ -34,7 +34,7 @@ module.exports = {
   entry: {
     app: [
       require.resolve('babel-polyfill'),
-      './src/front-end/index.js',
+      './src/front-end/index.jsx',
     ],
   },
   output: {
@@ -54,16 +54,6 @@ module.exports = {
         test: /(\.jsx|\.js)$/,
         use: {
           loader: 'babel-loader',
-          options: {
-            presets: ['es2015', 'react', 'es2017', 'stage-2'],
-            plugins: [
-              'transform-runtime',
-              'syntax-dynamic-import',
-              'transform-decorators-legacy',
-              ['transform-class-properties', { spec: true }],
-              'lodash',
-            ],
-          },
         },
         exclude: /node_modules/,
       },
