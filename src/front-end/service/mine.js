@@ -6,3 +6,10 @@ export function fetch(page = 1) {
     url: `/api/my/posts?page=${page}`
   });
 }
+
+export function remove(id) {
+  return request({
+    method: 'delete',
+    url: `/api/post/${id}`,
+  });
+}

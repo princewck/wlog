@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import ReactDOM from 'react-dom';
 import classnames from 'classnames';
-import { connect } from 'react-redux';
+import { connect } from 'dva';
 import { NavLink as Link } from 'react-router-dom';
 import './style.scss';
 import logo from '../../assets/images/logo.png';
@@ -18,6 +18,9 @@ const links = [
   },
 ];
 
+@connect(state => ({
+  isLogin: !!state.user.token,
+}))
 class Nav extends Component {
 
   constructor(props) {
@@ -98,6 +101,4 @@ class Nav extends Component {
   }
 }
 
-export default connect((state) => ({
-  isLogin: state.login && state.login.token,
-}))(Nav);
+export default Nav;

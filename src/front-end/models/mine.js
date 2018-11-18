@@ -1,5 +1,6 @@
-import { fetch } from '../service/mine';
+import { fetch, remove } from '../service/mine';
 import Pagination from '../utils/pagination';
+import { routerRedux } from 'dva/router';
 
 export default {
   namespace: 'mine',
@@ -28,7 +29,8 @@ export default {
       });
     },
     * delete({payload}, {put, call}) {
-      console.log(payload);
+      yield call(remove, payload);
+      yield put({type: 'fetch'});
     }
   },
 }

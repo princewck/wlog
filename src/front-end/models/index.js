@@ -3,6 +3,7 @@ import Posts from './posts';
 import Login from './login';
 import User from './user';
 import Mine from './mine';
+import Edit from './edit';
 
 export default {
   Test,
@@ -10,4 +11,5 @@ export default {
   Login,
   User,
   Mine,
+  Edit,
 }

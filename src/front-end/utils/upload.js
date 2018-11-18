@@ -1,18 +1,17 @@
 /**
  * https://help.aliyun.com/document_detail/31870.html?spm=5176.8466029.cors.1.2e8b1450x6nwL3
  */
-let token = null;
-import { store } from '../App-1';
+import { getUser } from './tokenHandler';
 import axios from 'axios';
 
 function getToken() {
-  const state = store.getState()['login'] || {};
+  const user = getUser() || {};
   const url = '/api/aliyun_sts'
   return axios({
     method: 'get',
     url,
     headers: {
-      Authorization: state.token,
+      Authorization: user.token,
     }
   }).then(res => {
     return res && res.data || {};
