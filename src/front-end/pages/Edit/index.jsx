@@ -61,6 +61,11 @@ class Edit extends Component {
     });
   }
 
+  onCancel = () => {
+    const { history } = this.props;
+    history.push('/posts');
+  }
+
   render() {
     const { article = {} } = this.props;
     return (
@@ -74,7 +79,7 @@ class Edit extends Component {
           </div>
           <div className="wlog-edit-page-operators">
             <button type="button" className="publish-btn" onClick={this.onPost}>发布</button>
-            <button type="button" className="cancel-btn">取消</button>
+            <button type="button" onClick={this.onCancel} className="cancel-btn">取消</button>
             <button type="button" className="draft-btn">存草稿</button>
           </div>
         </div>
