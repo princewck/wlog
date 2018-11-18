@@ -13,7 +13,7 @@ import { selectFiles } from '../../../utils';
     // XXX
     editor.on('paste', (e) => {
       // Paste image instead of HTML when copied from Excel
-      if (includes(e.clipboardData.types, 'Files')) {
+      if (e.clipboardData.types.includes('Files')) {
         const getData = e.clipboardData.getData;
         e.clipboardData.getData = function (key) {
           if (key === 'text/html' || key === 'text/plain') return '';

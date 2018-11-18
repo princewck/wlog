@@ -24,6 +24,7 @@ const create = async (ctx, next) => {
         ctx.status = 403;
         ctx.body = {message: '您没有修改这篇文章的权限！'}; 
       } else {
+        article.author = user._id;
         res = await articleService.update(article, ctx.$user);
         ctx.body = res&&res.value._id;
       }

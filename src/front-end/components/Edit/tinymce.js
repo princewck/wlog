@@ -65,6 +65,9 @@ export default {
   paste_preprocess: function (_plugin, e) {
     e.content = e.content.replace(/<br \/>/g, '</p><p>');
   },
+  content_style: `
+  * { font-size: 16px; color: #333;}
+  `,
   skin: 'lightgray',
   skin_url: '/static/skins/lightgray',
   autoresize_min_height: 400,
