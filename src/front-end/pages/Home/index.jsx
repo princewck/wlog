@@ -15,16 +15,19 @@ import { connect } from 'dva';
 class Home extends Component {
 
   componentDidMount() {
-    const { actions } = this.props;
-    actions.fetchArticles();
+    this.getPosts(1);
   }
 
-  paginate = (page) => {
+  paginate = (page = 1) => {
+    this.getPosts(page);
+  }
+
+  getPosts = (page) => {
     const { dispatch } = this.props;
     dispatch({
-      type: 'posts/getPosts',
+      type: 'posts/fetchPosts',
       payload: page,
-    })
+    })    
   }
 
   render() {

@@ -20,11 +20,12 @@ export default ({history, app}) => {
     <Router history={history}>
       <Switch>
         {
-          routes.map(route => (
+          routes.map((route, index) => (
           <Route 
             path={route.path} 
             exact={route.exact} 
             component={route.component}
+            key={index}
           />))
         }
       </Switch>

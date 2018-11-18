@@ -6,13 +6,14 @@ import {
   EditMD,
   MyPosts,
 } from './pages';
-import { Route, Switch } from 'dva/router';
+import { Route, Switch, withRouter } from 'dva/router';
 import { Nav, Footer, ScrollTop } from './components'; 
 
 const routes = [
   {
     path: '/',
     component: Home,
+    exact: true,
   },
   {
     path: '/mine/posts',
@@ -36,16 +37,17 @@ const routes = [
   }
 ];
 
+@withRouter
 export default class App extends Component {
 
   render() {
     return (
-      <div>
+      <div style={{padding: '100px 0 180px'}}>
         <Nav />
         <Switch>
         {
-         routes.map(route => (
-           <Route path={route.path} exact={route.exact} component={route.component} />
+         routes.map((route, index) => (
+           <Route path={route.path} exact={route.exact} component={route.component} key={index} />
          )) 
         }
         </Switch>

@@ -1,4 +1,6 @@
 import axios from 'axios';
+import { getUser } from '../utils/tokenHandler';
+
 axios.interceptors.response.use(function(response){
   return response;
 }, function(error){
@@ -11,18 +13,19 @@ axios.interceptors.response.use(function(response){
 });
 
 export default function ({
-  method,
+  method = 'get',
   url,
-  data,
-  headers,
+  data = {},
+  headers = {},
 }) {
-  axios({
+  const user = getUser(); 
+  return axios({
     method,
     url,
     data,
     headers: {
       ...headers,
-      Authorization: getToken(),
+      Authorization: user && user.token || '',
     }
   })  
 }
