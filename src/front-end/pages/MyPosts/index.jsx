@@ -2,33 +2,43 @@ import React, { Component, Fragment } from 'react';
 import ArticleList from '../../components/ArticleList';
 import { Pagination } from '../../components';
 import './style.scss';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import * as actionCreators from '../../actions';
+import { connect } from 'dva';
 
-
+@connect(state => ({
+  list: state.mine.list,
+  pagination: state.mine.pagination,
+}))
 class MyPosts extends Component {
 
-  componentDidMount() {
-    const { actions } = this.props;
-    actions.fetchMyArticles();
+  paginate = (page) => {
+    const { dispatch } = this.props;
+    dispatch({
+      type: 'mine/fetch',
+      payload: page,
+    });
   }
 
-  paginate = (page) => {
-    const { actions } = this.props;
-    actions.fetchMyArticles(page);
+  componentDidMount() {
+    this.paginate(1);
+  }
+
+  onDelete = (id) => {
+    const { dispatch } = this.props;
+    dispatch({
+      type: 'mine/delete',
+      payload: id,
+    });
   }
 
   render() {
-    const { articles = [], loading, actions, pagination } = this.props;
+    const { list: articles = [], loading, pagination } = this.props;
     return (
       <div className="wlog-home-page">
-        {/* <NavBar isLogin={isLogin}/> */}
         <div className="article-list">
           {
             articles.length ? (
               <Fragment>
-                <ArticleList list={articles} loading={loading} enableEdit onDelete={actions.deleteArticle} />
+                <ArticleList list={articles} loading={loading} enableEdit onDelete={this.onDelete} />
                 <Pagination data={pagination} onChange={this.paginate}></Pagination>
               </Fragment>
             ) : (
@@ -41,17 +51,5 @@ class MyPosts extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    articles: state.myArticles.articleList,
-    loading: state.myArticles.loading,
-    isLogin: state.login && state.login.token,
-    pagination: state.myArticles.pagination,
-  };
-};
 
-const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators(actionCreators, dispatch),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(MyPosts);
+export default MyPosts;
