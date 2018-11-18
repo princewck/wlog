@@ -16,6 +16,15 @@
     outline-width: 0px;
   }
 
+  .article-edit-tags {
+    display: flex;
+    align-items: center;
+    label {
+      height: 56px;
+      line-height: 56px;
+    }
+  }
+
   &-operators {
     width: 100%;
     padding: 15px 0;
@@ -39,7 +48,14 @@
       border-radius: 4px;
     }
     .cancel-btn {
-      margin-left: 30px;
+      height: 30px;
+      background: #fff;
+      color: #666;
+      font-size: 16px;
+      font-weight: lighter;
+      border-radius: 4px;
+      margin-left: 15px;
+      border: 1px solid #999;
     }
     .draft-btn {
       float: right;

@@ -1,0 +1,41 @@
+.wlog-tags {
+  display: flex;
+  flex-direction: row;
+  padding: 0 ;
+  .tags-main {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    padding: 2px;
+    background: #fff;
+    border-radius: 5px;
+    border: 1px solid #999;
+    .tags-list {
+      flex: 0 0 auto;
+      display: flex;
+      .tag-item {
+        background: #59e3d0;
+        color: #fff;
+        text-shadow: 1px 1px 1px #939191;
+        padding: 5px;
+        margin-left: 5px;
+      }
+    }
+    .tag-input {
+      margin-left: 10px;
+      flex: auto;
+      input {
+        height: 30px;
+        line-height: 30px;
+        background: transparent;
+        border: none;
+        outline: none;
+        font-size: 15px;
+        color: #666;
+        &:focus {
+          outline: none !important;
+        }
+      }
+    }
+  }
+}

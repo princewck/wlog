@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
 import { withRouter } from 'react-router-dom';
-import EditComp from '../../components/Edit';
+import { Edit as EditComp, Tags } from '../../components';
 import './style.scss';
 
 const config = {
@@ -68,6 +68,10 @@ class Edit extends Component {
         <div className="wlog-edit-page">
           <input type="text" placeholder="请输入标题" value={article.title || ''} onChange={this.onTitleChange} />
           <EditComp config={config} onContentChange={this.onChangeContent} initArticle={article} />
+          <div className="article-edit-tags">
+            <label>标签：</label>
+            <Tags/>
+          </div>
           <div className="wlog-edit-page-operators">
             <button type="button" className="publish-btn" onClick={this.onPost}>发布</button>
             <button type="button" className="cancel-btn">取消</button>

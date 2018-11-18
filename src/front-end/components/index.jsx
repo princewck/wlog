@@ -10,6 +10,7 @@ import Nav from './Nav';
 import ScrollTop from './ScrollTop';
 import Svg from './Svg';
 import Pagination from './Pagination';
+import Tags from './Tags';
 
 export {
   Article,
@@ -24,4 +25,5 @@ export {
   ScrollTop,
   Svg,
   Pagination,
+  Tags,
 };
